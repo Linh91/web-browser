@@ -1,0 +1,22 @@
+{
+  "name": "web-browser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ffasolin/web-browser.git"
+  },
+  "author": "Filipe Fasolin, Peter Barcsak, Ngoc Ha, Will Gant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ffasolin/web-browser/issues"
+  },
+  "homepage": "https://github.com/ffasolin/web-browser#readme",
+  "dependencies": {
+    "jasmine": "^2.6.0"
+  }
+}
