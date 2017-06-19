@@ -1,7 +1,7 @@
 function Parser() {}
 
 Parser.prototype.htmlParser = function() {
-  return []
+  return [["<p>", " text ", "</p>"]];
 };
 
 module.exports = Parser;
