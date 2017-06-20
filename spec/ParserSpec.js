@@ -1,8 +1,7 @@
 const Parser = require('../src/Parser.js')
 
 describe('Parser', function() {
-  var htmlString, parser;
-
+  var htmlString, parser, result;
 
   it('returns array from html string', function() {
     htmlString = "<p> text </p>";
@@ -26,5 +25,12 @@ describe('Parser', function() {
     htmlString = "<p><h1> header </h1></p>";
     parser = new Parser(htmlString);
     expect(parser.htmlParser()).toEqual([["<p>", ["<h1>", " header ", "</h1>"], "</p>"]]);
+  });
+
+  it('returns a array of deeply nested tags in the correct format', function() {
+    htmlString = "<body><div><h1>Example Domain</h1></div></body>";
+    parser = new Parser(htmlString);
+    result = [['<body>', ['<div>', ['<h1>', 'Example Domain', '</h1>'], '</div>'], '</body>']];
+    expect(parser.htmlParser()).toEqual(result);
   });
 });
