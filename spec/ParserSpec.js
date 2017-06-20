@@ -6,31 +6,31 @@ describe('Parser', function() {
   it('returns array from html string', function() {
     htmlString = "<p> text </p>";
     parser = new Parser(htmlString);
-    expect(parser.htmlParser()).toEqual(jasmine.any(Array));
+    expect(parser.parsedHtml()).toEqual(jasmine.any(Array));
   });
 
   it('returns an array with components of p tag', function() {
     htmlString = "<p> text </p>";
     parser = new Parser(htmlString);
-    expect(parser.htmlParser()).toEqual([["<p>", " text ", "</p>"]]);
+    expect(parser.parsedHtml()).toEqual(["<p>", " text ", "</p>"]);
   });
 
   it('returns an array with components of h1 tag', function() {
     htmlString = "<h1> header </h1>";
     parser = new Parser(htmlString);
-    expect(parser.htmlParser()).toEqual([["<h1>", " header ", "</h1>"]]);
+    expect(parser.parsedHtml()).toEqual(["<h1>", " header ", "</h1>"]);
   });
 
   it('returns an array of p tags when h1 tag nested inside', function() {
     htmlString = "<p><h1> header </h1></p>";
     parser = new Parser(htmlString);
-    expect(parser.htmlParser()).toEqual([["<p>", ["<h1>", " header ", "</h1>"], "</p>"]]);
+    expect(parser.parsedHtml()).toEqual(["<p>", ["<h1>", " header ", "</h1>"], "</p>"]);
   });
 
   it('returns a array of deeply nested tags in the correct format', function() {
-    htmlString = "<body><div><h1>Example Domain</h1></div></body>";
+    htmlString = "<html><body><p>Hello world!</p></body></html>";
     parser = new Parser(htmlString);
-    result = [['<body>', ['<div>', ['<h1>', 'Example Domain', '</h1>'], '</div>'], '</body>']];
-    expect(parser.htmlParser()).toEqual(result);
+    result = ['<html>', ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'], '</html>'];
+    expect(parser.parsedHtml()).toEqual(result);
   });
 });
