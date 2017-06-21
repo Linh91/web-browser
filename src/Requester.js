@@ -3,7 +3,7 @@ var http = require('http');
 function Requester() {}
 
 Requester.prototype.fetcher = function (webUrl, fn) {
-  var page = ""
+  var page = '';
 
   var options = {
     host: webUrl,
@@ -11,11 +11,12 @@ Requester.prototype.fetcher = function (webUrl, fn) {
     path: '/'
   };
 
-  http.get(options, function(resp){
+
+  http.get(options, function(resp) {
     resp.setEncoding('utf8');
-    resp.on('data', function(chunk){
+    resp.on('data', function(chunk) {
       page += chunk;
-      fn(page)
+      fn(page);
     });
   }).on("error", function(e){
     console.log("Got error: " + e.message);
