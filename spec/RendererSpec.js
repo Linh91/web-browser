@@ -1,11 +1,15 @@
 const Renderer = require('../src/Renderer.js')
 
 describe('Renderer', function() {
-  var parsedHtml, renderer;
+  var originalLog, parsedHtml, renderer;
 
   it('console logs all text not in tags', function() {
-    renderer = new Renderer()
+    renderer = new Renderer();
     parsedHtml = ['<html>', ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'], '</html>'];
-    expect(renderer.printContent(parsedHtml)).toEqual("Hello world!")
+    originalLog = console.log;
+    console.log = jasmine.createSpy("log");
+    renderer.printContent(parsedHtml);
+    expect(console.log).toHaveBeenCalledWith("Hello world!");
+    console.log = originalLog;
   });
 });
