@@ -1,12 +1,9 @@
 var http = require('http');
 
-function Requester() {
+function Requester() {}
 
-}
-
-
-Requester.prototype.fetch = function (webUrl) {
-  var page;
+Requester.prototype.fetcher = function (webUrl, fn) {
+  var page = ""
 
   var options = {
     host: webUrl,
@@ -17,15 +14,12 @@ Requester.prototype.fetch = function (webUrl) {
   http.get(options, function(resp){
     resp.setEncoding('utf8');
     resp.on('data', function(chunk){
-      return page += chunk;
+      page += chunk;
+      fn(page)
     });
   }).on("error", function(e){
     console.log("Got error: " + e.message);
   });
-
-  return page;
-
 };
-
 
 module.exports = Requester;
