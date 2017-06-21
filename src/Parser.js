@@ -1,5 +1,5 @@
 function Parser(htmlString) {
-  this.htmlCharacters = htmlString.split('');
+  this.htmlCharacters = htmlString.replace(/[\n\r]/g, '').split('');
 }
 
 Parser.prototype.parsedHtml = function() {
