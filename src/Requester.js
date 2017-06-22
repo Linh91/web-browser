@@ -11,7 +11,6 @@ Requester.prototype.fetcher = function (webUrl, fn) {
     path: '/'
   };
 
-
   http.get(options, function(resp) {
     resp.setEncoding('utf8');
     resp.on('data', function(chunk) {
