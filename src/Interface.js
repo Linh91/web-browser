@@ -16,6 +16,11 @@ function Interface() {
 
 Interface.prototype.welcome = function () {
   console.log(this.pic, '\n', this.title)
+  this.browse();
+};
+
+Interface.prototype.browse = function () {
+
 };
 
 module.exports = Interface;
