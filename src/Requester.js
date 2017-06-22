@@ -18,7 +18,7 @@ Requester.prototype.fetcher = function (webUrl, fn) {
     resp.on('data', function(chunk) {
       page += chunk;
     });
-    resp.on('end', () => {
+    resp.on('end', function() {
       fn(page);
     })
   }).on("error", function(e){
