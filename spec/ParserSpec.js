@@ -35,7 +35,7 @@ describe('Parser', function() {
   });
 
   it('returns an array of deeply nested multiple child elements in the correct format', function() {
-    htmlString = "<html><body><p>Hello world!</p><p>We are building a web browser!</p><p>Platypus</p></body><h1>Header</h1></html>";
+    htmlString = "<html>\n<body>\n<p>Hello world!</p>\n<p>We are building a web browser!</p>\n<p>Platypus</p>\n</body><h1>Header</h1>\n</html>";
     parser = new Parser(htmlString);
     result = ['<html>', ['<body>',
              ['<p>', 'Hello world!', '</p>'],

@@ -8,7 +8,10 @@ describe('Browser', function() {
     originalLog = console.log;
     console.log = jasmine.createSpy('log');
     browser.visitPage(webUrl, function(done) {
-      expect(console.log).toHaveBeenCalledWith('Hello World');
+      expect(console.log).toHaveBeenCalledWith('Hello world!');
+      expect(console.log).toHaveBeenCalledWith('We are bulding a web browser!');
+      expect(console.log).toHaveBeenCalledWith('Platypus');
+      expect(console.log).toHaveBeenCalledWith('Header');
       done();
     });
     console.log = originalLog;

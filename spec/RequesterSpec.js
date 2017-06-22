@@ -7,8 +7,15 @@ describe('Requester', function() {
     requester = new Requester();
     webUrl = 'web-browser-test.herokuapp.com';
     requester.fetcher(webUrl, function(source) {
-      expect(source).toEqual('<html>\n<body>\n<p>Hello world</p>\n</body>\n</html>\n');
+      expect(source).toEqual('<html>\n' +
+                             '<body>\n' +
+                             '<p>Hello world!</p>\n' +
+                             '<p>We are building a web browser!</p>\n' +
+                             '<p>Platypus</p>\n' +
+                             '</body>\n' +
+                             '<h1>Header</h1>\n' +
+                             '</html>\n');
       done();
-    })
+    });
   });
 });

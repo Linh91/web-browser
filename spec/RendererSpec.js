@@ -16,10 +16,10 @@ describe('Renderer', function() {
   it('console logs all text not in tags', function() {
     renderer = new Renderer();
     parsedHtml = ['<html>', ['<body>',
-             ['<p>', 'Hello world!', '</p>'],
-             ['<p>', 'We are building a web browser!', '</p>'],
-             [ '<p>', 'Platypus', '</p>' ], '</body>'],
-             [ '<h1>', 'Header', '</h1>' ], '</html>'];
+                 ['<p>', 'Hello world!', '</p>'],
+                 ['<p>', 'We are building a web browser!', '</p>'],
+                 [ '<p>', 'Platypus', '</p>' ], '</body>'],
+                 [ '<h1>', 'Header', '</h1>' ], '</html>'];
     originalLog = console.log;
     console.log = jasmine.createSpy("log");
     renderer.printContent(parsedHtml);
