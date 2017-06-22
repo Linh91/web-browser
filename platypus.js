@@ -1,6 +1,7 @@
-const Browser = require('./src/Browser.js');
+const Browser = require('./src/Browser.js')
+const readline = require('readline');
 
-function platypus() {
+(function() {
   const pic = "                           _.-^~~^^^`~-,_,,~''''''```~,''``~'``~, \n\
                    ______,'  -o  :.  _    .          ;     ,'`,  `. \n\
                   (      -\.._,.;;'._ ,(   }        _`_-_,,    `, `, \n\
@@ -15,13 +16,12 @@ function platypus() {
                                                  __/ | | |                  \n\
                                                 |___/  |_|                  "
 
-  var browser = new Browser();
+  const browser = new Browser();
 
-  console.log('\n', pic, '\n', title)
+  console.log('\n', pic, '\n', title);
 
-  var readline = require('readline');
+  const rl = readline.createInterface(process.stdin, process.stdout);
 
-  var rl = readline.createInterface(process.stdin, process.stdout);
   rl.setPrompt('Please enter a url: \n')
   rl.prompt();
 
@@ -30,7 +30,5 @@ function platypus() {
     rl.on('line', function(webUrl) {
       browser.visitPage(webUrl);
     })
-  });
-};
-
-platypus()
+  })
+})();
