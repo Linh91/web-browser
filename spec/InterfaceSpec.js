@@ -1,12 +1,14 @@
 const Interface = require('../src/Interface.js');
 
 describe('Interface', function() {
+  var platerface;
+
   it("logs logo and image", function() {
-    var interface = new Interface();
+    platerface = new Interface();
     originalLog = console.log;
     console.log = jasmine.createSpy('log');
-    interface.welcome()
-    expect(console.log).toHaveBeenCalled()
+    platerface.welcome();
+    expect(console.log).toHaveBeenCalledWith(platerface.pic, '\n', platerface.title);
     console.log = originalLog;
   });
 
@@ -15,6 +17,6 @@ describe('Interface', function() {
   });
 });
 
-interface = new Interface()
-interface.welcome()
-interface.browse()
+// interface = new Interface()
+// interface.welcome()
+// interface.browse()

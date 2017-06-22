@@ -4,7 +4,7 @@ function Interface() {
                   (      -\.._,.;;'._ ,(   }        _`_-_,,    `, `, \n\
                    ``~~~~~~'   ((/'((((____/~~~~~~'(,(,___>      `~'"
 
-  this.title =  "                     _____    _           _                                 \n\
+  this.title =  "                    _____    _           _                                 \n\
                     |  __ \\  | |         | |                                \n\
                     | |__) | | |   __ _  | |_   _   _   _ __    _   _   ___ \n\
                     |  ___/  | |  / _` | | __| | | | | | '_ \\  | | | | / __|\n\
@@ -13,3 +13,9 @@ function Interface() {
                                                  __/ | | |                  \n\
                                                 |___/  |_|                  "
 };
+
+Interface.prototype.welcome = function () {
+  console.log(this.pic, '\n', this.title)
+};
+
+module.exports = Interface;
