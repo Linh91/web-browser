@@ -18,11 +18,11 @@ describe('Requester', function() {
     requester.fetcher(webUrl, function(source) {
     expect(source).toEqual('<html>\n' +
                            '<body>\n' +
+                           '<h1>Header</h1>\n' +
                            '<p>Hello world!</p>\n' +
                            '<p>We are building a web browser!</p>\n' +
                            '<p>Platypus</p>\n' +
                            '</body>\n' +
-                           '<h1>Header</h1>\n' +
                            '</html>\n');
     done();
     });
