@@ -46,9 +46,24 @@ describe('Parser', function() {
   });
 
   it('removes everything before the opening body tag', function() {
-    htmlString = "<!DOCTYPE html>\n<html>\n<head>\n<title>this is the title</title>\n</head>\n<body>\n<p>Web browser</p>\n</body>\n</html>"
-    parser = new Parser(htmlString)
-    result = ['<body>',['<p>', 'Web browser', '</p>'], '</body>']
+    htmlString = "<!DOCTYPE html>\n<html>\n<head>\n<title>this is the title</title>\n</head>\n<body>\n<p>Web browser</p>\n</body>\n</html>";
+    parser = new Parser(htmlString);
+    result = ['<body>',['<p>', 'Web browser', '</p>'], '</body>'];
+    expect(parser.parsedHtml()).toEqual(result);
+  });
+
+  it('removes unnecessary tabs', function() {
+    htmlString = '  <body>' +
+                 '    <div>' +
+                 '      <header> Platypus </header>' +
+                 "    <p>The platypus is among nature's most unlikely animals.</p>" +
+                 '      </div>' +
+                 '  </body>'
+    parser = new Parser(htmlString);
+    result = ['<body>',['<div>',
+             ['<header>', ' Platypus ', '</header>'],
+             ['<p>', "The platypus is among nature's most unlikely animals.", '</p>'],
+             '</div>'], '</body>'];
     expect(parser.parsedHtml()).toEqual(result);
   });
 });
