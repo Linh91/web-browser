@@ -1,5 +1,7 @@
 function Parser(htmlString) {
-  this.htmlCharacters = htmlString.replace(/[\n\r]/g, '').split('');
+  this.htmlString = htmlString;
+  this._chopPreBody();
+  this.htmlCharacters = this.htmlString.replace(/[\n\r]/g, '').split('');
 }
 
 // Controls the parsing, recursive, and can handle multiple childs in a line with the
@@ -25,6 +27,7 @@ Parser.prototype._getCloseTag = function() {
   var endIndex = this.htmlCharacters.indexOf('>');
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
+
 Parser.prototype.parsedHtml = function() {
   return this._parseNextElement();
 };
@@ -34,6 +37,9 @@ Parser.prototype._getOpenTag = function() {
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
 
+Parser.prototype._chopPreBody = function () {
+  this.htmlString = this.htmlString.substring(this.htmlString.indexOf("<body>"));
+};
 //looking for content, but if it finds an opentag, it starts a new line
 
 Parser.prototype._getContent = function() {
