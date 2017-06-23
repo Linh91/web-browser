@@ -7,9 +7,9 @@ describe('Requester', function() {
       requester = new Requester();
       webUrl = 'www.bbc.co.uk';
       requester.fetcher(webUrl, function(source) {
-      expect(source.length).not.toBeLessThan(200000);
-      done();
-    });
+        expect(source.length).not.toBeLessThan(200000);
+        done();
+      });
   });
 
   it('returns really big pages which we presume arrive in several chunks', function(done) {
@@ -26,5 +26,23 @@ describe('Requester', function() {
                            '</html>\n');
     done();
     });
+  });
+
+  it('makes requests to different paths', function(done) {
+      requester = new Requester();
+      webUrl = 'www.bbc.co.uk/news';
+      requester.fetcher(webUrl, function(source) {
+        expect(source).toContain('Scotland', 'N. Ireland', 'Business');
+        done();
+      });
+  });
+
+  it('makes requests to different paths', function(done) {
+      requester = new Requester();
+      webUrl = 'web-browser-test.herokuapp.com/testpath';
+      requester.fetcher(webUrl, function(source) {
+        expect(source).toContain("The platypus is among nature's most unlikely animals.");
+        done();
+      });
   });
 });
