@@ -22,13 +22,13 @@ const readline = require('readline');
 
   const rl = readline.createInterface(process.stdin, process.stdout);
 
-  rl.setPrompt('Please enter a url: \n')
+  rl.setPrompt('Please enter a url: \n');
   rl.prompt();
 
   rl.question("Please enter url: \n", function(webUrl) {
-    browser.visitPage(webUrl);
+    browser.visitPage(webUrl, function() {});
     rl.on('line', function(webUrl) {
-      browser.visitPage(webUrl);
-    })
-  })
+      browser.visitPage(webUrl, function() {});
+    });
+  });
 })();
