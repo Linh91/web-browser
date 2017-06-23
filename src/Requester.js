@@ -5,12 +5,10 @@ function Requester() {}
 Requester.prototype.fetcher = function (webUrl, fn) {
   var page = '';
 
-  // the path is hard-coded as a forward slash, which means only top-level domains can currently be visited
-
   var options = {
-    host: webUrl,
+    host: webUrl.split('/')[0],
     port: 80,
-    path: '/'
+    path: this._getPath(webUrl)
   };
 
   http.get(options, function(resp) {
@@ -24,6 +22,16 @@ Requester.prototype.fetcher = function (webUrl, fn) {
   }).on("error", function(e){
     console.log("Got error: " + e.message);
   });
+};
+
+Requester.prototype._getPath = function (webUrl) {
+  var webUrlArray = webUrl.split('/');
+
+  if ( webUrl.split('/')[1] ) {
+    return '/' + webUrlArray.slice(1, webUrlArray.length).join('/');
+  } else {
+    return '/';
+  }
 };
 
 module.exports = Requester;
