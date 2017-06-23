@@ -2,6 +2,9 @@ function Parser(htmlString) {
   this.htmlCharacters = htmlString.replace(/[\n\r]/g, '').split('');
 }
 
+// Controls the parsing, recursive, and can handle multiple childs in a line with the
+// while loop, which is looping till finds a close tag for the line
+
 Parser.prototype._parseNextElement = function() {
   var nextLine = [];
   nextLine.push(this._getOpenTag());
@@ -12,6 +15,8 @@ Parser.prototype._parseNextElement = function() {
   }
   return nextLine;
 };
+
+//looking for a close tag, but if it finds an opentag, it starts a new line
 
 Parser.prototype._getCloseTag = function() {
   if (this._openTag()) {
@@ -28,6 +33,8 @@ Parser.prototype._getOpenTag = function() {
   var endIndex = this.htmlCharacters.indexOf('>');
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
+
+//looking for content, but if it finds an opentag, it starts a new line
 
 Parser.prototype._getContent = function() {
   if (this._openTag()) {
