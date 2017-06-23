@@ -58,7 +58,7 @@ describe('Parser', function() {
                  '      <header> Platypus </header>' +
                  "    <p>The platypus is among nature's most unlikely animals.</p>" +
                  '      </div>' +
-                 '  </body>'
+                 '  </body>';
     parser = new Parser(htmlString);
     result = ['<body>',['<div>',
              ['<header>', ' Platypus ', '</header>'],

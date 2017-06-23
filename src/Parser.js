@@ -1,7 +1,7 @@
 function Parser(htmlString) {
   this.htmlString = htmlString;
   this._chopPreBody();
-  this.htmlCharacters = this._cleanHtml(this.htmlString);
+  this.htmlCharacters = this._cleanHtml();
 }
 
 // Controls the parsing, recursive, and can handle multiple childs in a line with the
@@ -42,8 +42,9 @@ Parser.prototype._chopPreBody = function () {
   var bodyTag = bodyRegex.exec(this.htmlString);
   if(bodyTag !== null) {
     this.htmlString = this.htmlString.substring(bodyTag.index);
-  };
+  }
 };
+
 //looking for content, but if it finds an opentag, it starts a new line
 
 Parser.prototype._getContent = function () {
@@ -60,10 +61,10 @@ Parser.prototype._openTag = function () {
 
 // removes \n charachters, cleans tabs and returns the array of characters
 
-Parser.prototype._cleanHtml = function (htmlString) {
-  htmlString = htmlString.replace(/[\n\r]/g, '')
-  htmlString = htmlString.split(/>[\s]*</g).join('><')
-  return htmlString.split('')
+Parser.prototype._cleanHtml = function () {
+  this.htmlString = this.htmlString.replace(/[\n\r]/g, '');
+  this.htmlString = this.htmlString.split(/>[\s]*</g).join('><');
+  return this.htmlString.split('');
 };
 
 module.exports = Parser;
