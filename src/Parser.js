@@ -38,7 +38,11 @@ Parser.prototype._getOpenTag = function () {
 };
 
 Parser.prototype._chopPreBody = function () {
-  this.htmlString = this.htmlString.substring(this.htmlString.indexOf("<body>"));
+  var bodyRegex = /<\s*?body\s*?>/igm
+  var bodyTag = bodyRegex.exec(this.htmlString)
+  if(bodyTag !== null) {
+  this.htmlString = this.htmlString.substring(bodyTag.index);
+  };
 };
 //looking for content, but if it finds an opentag, it starts a new line
 
