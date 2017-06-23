@@ -5,7 +5,7 @@ describe('Renderer', function() {
 
   it('console logs all text not in tags', function() {
     renderer = new Renderer();
-    parsedHtml = ['<html>', ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'], '</html>'];
+    parsedHtml = ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'];
     originalLog = console.log;
     console.log = jasmine.createSpy("log");
     renderer.printContent(parsedHtml);
@@ -15,11 +15,11 @@ describe('Renderer', function() {
 
   it('console logs all text not in tags', function() {
     renderer = new Renderer();
-    parsedHtml = ['<html>', ['<body>',
+    parsedHtml = [['<body>',
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'],
-                 [ '<h1>', 'Header', '</h1>' ], '</html>'];
+                 [ '<h1>', 'Header', '</h1>' ]];
     originalLog = console.log;
     console.log = jasmine.createSpy("log");
     renderer.printContent(parsedHtml);
@@ -30,4 +30,15 @@ describe('Renderer', function() {
     console.log = originalLog;
   });
 
+  it('ignores script tags', function() {
+    renderer = new Renderer();
+    parsedHtml = ['<body>',
+                 [ '<h1>', 'Header', '</h1>' ],
+                 ['<script type="button">', 'Some script text', '</script>'],
+                 ['<p>', 'Hello world!', '</p>'],
+                 ['<p>', 'We are building a web browser!', '</p>'],
+                 [ '<p>', 'Platypus', '</p>' ], '</body>'];
+    renderer.printContent(parsedHtml)
+    console.log(renderer.printContent(parsedHtml));
+  });
 });
