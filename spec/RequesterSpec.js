@@ -7,13 +7,13 @@ describe('Requester', function() {
     requester = new Requester();
   });
 
-  it('returns really big pages which we presume arrive in several chunks', function(done) {
+  it('returns really big pages like the BBC which we presume arrive in several chunks', function(done) {
       webUrl = 'www.bbc.co.uk';
       requester.fetcher(webUrl, function(source) {
         expect(source.length).not.toBeLessThan(200000);
         done();
       });
-  });
+  }, 10000);
 
   it('returns really big pages which we presume arrive in several chunks', function(done) {
     webUrl = 'web-browser-test.herokuapp.com';
@@ -28,7 +28,7 @@ describe('Requester', function() {
                            '</html>\n');
     done();
     });
-  });
+  }, 10000);
 
   it('makes requests to different paths', function(done) {
       webUrl = 'www.bbc.co.uk/news';
@@ -36,7 +36,7 @@ describe('Requester', function() {
         expect(source).toContain('Scotland', 'N. Ireland', 'Business');
         done();
       });
-  });
+  }, 10000);
 
   it('makes requests to different paths', function(done) {
       webUrl = 'web-browser-test.herokuapp.com/testpath';
