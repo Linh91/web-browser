@@ -44,4 +44,17 @@ describe('Renderer', function() {
     expect(console.log).not.toHaveBeenCalledWith('Some script text');
     expect(console.log).toHaveBeenCalledWith('Hello world!');
   });
+
+  it('ignores style tags', function() {
+    parsedHtml = ['<body>',
+                 [ '<h1>', 'Header', '</h1>' ],
+                 ['<style type="button">', 'Style tags', '</style>'],
+                 ['<p>', 'Hello world!', '</p>'],
+                 ['<p>', 'We are building a web browser!', '</p>'],
+                 [ '<p>', 'Platypus', '</p>' ], '</body>'];
+    renderer.printContent(parsedHtml);
+    expect(console.log).toHaveBeenCalledWith('Header');
+    expect(console.log).not.toHaveBeenCalledWith('Some script text');
+    expect(console.log).toHaveBeenCalledWith('Hello world!');
+  });
 });
