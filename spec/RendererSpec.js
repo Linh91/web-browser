@@ -24,7 +24,9 @@ describe('Renderer', function() {
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'],
                  [ '<h1>', 'Header', '</h1>' ]];
-    expect(renderer.printContent(parsedHtml)).toEqual("Hello world!\nWe are building a web browser!\nPlatypus\nHeader\n");
+    expect(renderer.printContent(parsedHtml)).toEqual('Hello world!\n' +
+                                                      'We are building a web browser!\n' +
+                                                      'Platypus\nHeader\n');
   });
 
   it('ignores script tags', function() {
@@ -34,7 +36,10 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    expect(renderer.printContent(parsedHtml)).toEqual("Header\nHello world!\nWe are building a web browser!\nPlatypus\n");
+    expect(renderer.printContent(parsedHtml)).toEqual('Header\n' +
+                                                      'Hello world!\n' +
+                                                      'We are building a web browser!\n' +
+                                                      'Platypus\n');
   });
 
   it('ignores style tags', function() {
@@ -44,7 +49,10 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    expect(renderer.printContent(parsedHtml)).toEqual("Header\nHello world!\nWe are building a web browser!\nPlatypus\n");
+    expect(renderer.printContent(parsedHtml)).toEqual('Header\n' +
+                                                      'Hello world!\n' +
+                                                      'We are building a web browser!\n' +
+                                                      'Platypus\n');
   });
 
   it('ignores script tags with other tags inbetween', function() {
@@ -55,10 +63,9 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    expect(renderer.printContent(parsedHtml)).toEqual("Header\nHello world!\nWe are building a web browser!\nPlatypus\n");
-    //
-    // expect(console.log).toHaveBeenCalledWith('Header');
-    // expect(console.log).not.toHaveBeenCalledWith('Some script text');
-    // expect(console.log).toHaveBeenCalledWith('Hello world!');
+    expect(renderer.printContent(parsedHtml)).toEqual('Header\n' +
+                                                      'Hello world!\n' +
+                                                      'We are building a web browser!\n' +
+                                                      'Platypus\n');
   });
 });
