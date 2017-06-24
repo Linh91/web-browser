@@ -15,8 +15,7 @@ describe('Renderer', function() {
 
   it('console logs all text not in tags', function() {
     parsedHtml = ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'];
-    renderer.printContent(parsedHtml);
-    expect(console.log).toHaveBeenCalledWith("Hello world!");
+    expect(renderer.printContent(parsedHtml)).toEqual("Hello world!\n");
   });
 
   it('console logs all text not in tags', function() {
@@ -25,11 +24,7 @@ describe('Renderer', function() {
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'],
                  [ '<h1>', 'Header', '</h1>' ]];
-    renderer.printContent(parsedHtml);
-    expect(console.log).toHaveBeenCalledWith("Hello world!");
-    expect(console.log).toHaveBeenCalledWith("We are building a web browser!");
-    expect(console.log).toHaveBeenCalledWith("Platypus");
-    expect(console.log).toHaveBeenCalledWith("Header");
+    expect(renderer.printContent(parsedHtml)).toEqual("Hello world!\nWe are building a web browser!\nPlatypus\nHeader\n");
   });
 
   it('ignores script tags', function() {
@@ -39,10 +34,7 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    renderer.printContent(parsedHtml);
-    expect(console.log).toHaveBeenCalledWith('Header');
-    expect(console.log).not.toHaveBeenCalledWith('Some script text');
-    expect(console.log).toHaveBeenCalledWith('Hello world!');
+    expect(renderer.printContent(parsedHtml)).toEqual("Header\nHello world!\nWe are building a web browser!\nPlatypus\n");
   });
 
   it('ignores style tags', function() {
@@ -52,10 +44,7 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    renderer.printContent(parsedHtml);
-    expect(console.log).toHaveBeenCalledWith('Header');
-    expect(console.log).not.toHaveBeenCalledWith('Some script text');
-    expect(console.log).toHaveBeenCalledWith('Hello world!');
+    expect(renderer.printContent(parsedHtml)).toEqual("Header\nHello world!\nWe are building a web browser!\nPlatypus\n");
   });
 
   it('ignores script tags with other tags inbetween', function() {
@@ -66,9 +55,10 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    renderer.printContent(parsedHtml);
-    expect(console.log).toHaveBeenCalledWith('Header');
-    expect(console.log).not.toHaveBeenCalledWith('Some script text');
-    expect(console.log).toHaveBeenCalledWith('Hello world!');
+    expect(renderer.printContent(parsedHtml)).toEqual("Header\nHello world!\nWe are building a web browser!\nPlatypus\n");
+    //
+    // expect(console.log).toHaveBeenCalledWith('Header');
+    // expect(console.log).not.toHaveBeenCalledWith('Some script text');
+    // expect(console.log).toHaveBeenCalledWith('Hello world!');
   });
 });
