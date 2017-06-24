@@ -26,9 +26,13 @@ const readline = require('readline');
   rl.prompt();
 
   rl.question("Please enter url: \n", function(webUrl) {
-    browser.visitPage(webUrl, function() {});
+    browser.visitPage(webUrl, function(data) {
+      console.log(data)
+    });
     rl.on('line', function(webUrl) {
-      browser.visitPage(webUrl, function() {});
+    browser.visitPage(webUrl, function(data) {
+      console.log(data)
+    });
     });
   });
 })();

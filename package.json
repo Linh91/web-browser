@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ffasolin/web-browser#readme",
   "dependencies": {
+    "blessed": "^0.1.81",
     "eslint": "^4.0.0",
     "jasmine": "^2.6.0"
   }
