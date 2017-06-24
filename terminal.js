@@ -38,7 +38,6 @@ var pic = blessed.box({
 var display = blessed.box({
   top: '18%',
   height: '76%',
-  content: 'display',
   scrollable: true,
   tags: true,
   mouse: true,
@@ -51,21 +50,7 @@ var display = blessed.box({
   },
 });
 
-var addressBar = blessed.form({
-  top: '94%',
-  height: '8%',
-  width: '30%',
-  left: '70%',
-  name:'addressbar',
-  style: {
-    fg: 'white',
-  },
-  border: {
-  type: 'line'
-  },
-});
-
-var textBox = blessed.textbox({
+var addressBar = blessed.textbox({
   parent: addressBar,
   name: 'input',
   inputOnFocus: true,
@@ -80,16 +65,13 @@ var textBox = blessed.textbox({
   },
 });
 
-textBox.on('submit', (text) => {
+addressBar.on('submit', (text) => {
   browser.visitPage(text, function(content) {
-    display.pushLine(content)
+    display.setContent(content);
+    addressBar.focus();
+    screen.render();
   });
-  textBox.clearValue();
-  screen.render();
-})
-
-screen.key('enter', (ch, key) => {
-  textBox.focus();
+  addressBar.clearValue();
 })
 
 // Append our box to the screen.
@@ -97,9 +79,8 @@ screen.append(title);
 screen.append(pic);
 screen.append(display);
 screen.append(addressBar);
-screen.append(textBox);
 
-screen.key(['escape', 'q', 'C-c', 'e'], function(ch, key) {
+screen.key(['escape'], function(ch, key) {
   return process.exit(0);
 });
 
