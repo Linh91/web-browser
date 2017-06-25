@@ -10,7 +10,7 @@ Browser.prototype.visitPage = function(webUrl, fn) {
    this.requester.fetcher(webUrl, function(source) {
     var parser = new Parser(source);
     var renderer = new Renderer();
-    fn(renderer.printContent(parser.parsedHtml()));
+    renderer.printContent(parser.parsedHtml(), fn);
   });
 };
 
