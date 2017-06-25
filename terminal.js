@@ -67,7 +67,18 @@ var addressBar = blessed.textbox({
 
 addressBar.on('submit', (text) => {
   browser.visitPage(text, function(content) {
-    display.pushLine(content);
+    var box = blessed.textbox({
+      parent: display,
+      top: '94%',
+      height: '8%',
+      width: '70%',
+      style: {
+        fg: 'white',
+        bg: 'red'
+      }
+    })
+    box.pushLine(content)
+    display.pushLine(box.content);
     addressBar.focus();
     screen.render();
   });
