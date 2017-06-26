@@ -93,10 +93,10 @@ var navigate = function(text) {
   var linkCounter = 0
   browser.visitPage(text, function(content, tag) {
     if (/<[^>]*a href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + ' ') + `{blue-fg}${content}{/}`);
+      linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
       links.push(tag);
       linkCounter += 1;
-      display.pushLine(`{blue-fg}${content}{/} (${linkCounter})`);
+      display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
       screen.render();
     } else {
       display.pushLine(content);
