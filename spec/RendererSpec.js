@@ -1,32 +1,30 @@
 const Renderer = require('../src/Renderer.js')
 
 describe('Renderer', function() {
-  var originalLog, parsedHtml, renderer;
+  var originalLog, parsedHtml, result, renderer;
 
   beforeEach(function() {
     renderer = new Renderer();
-    originalLog = console.log;
-    console.log = jasmine.createSpy("log");
-  });
-
-  afterEach(function() {
-    console.log = originalLog;
+    result = '';
   });
 
   it('console logs all text not in tags', function() {
     parsedHtml = ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'];
-    expect(renderer.printContent(parsedHtml)).toEqual("Hello world!\n");
+    renderer.printContent(parsedHtml, function(content) {
+      expect(content).toEqual("Hello world!");
+    });
   });
 
-  it('console logs all text not in tags', function() {
+  it('console logs all text from multidimensional arrays', function() {
     parsedHtml = [['<body>',
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'],
                  [ '<h1>', 'Header', '</h1>' ]];
-    expect(renderer.printContent(parsedHtml)).toEqual('Hello world!\n' +
-                                                      'We are building a web browser!\n' +
-                                                      'Platypus\nHeader\n');
+    renderer.printContent(parsedHtml, function(content) {
+      result += content;
+    });
+    expect(result).toEqual('Hello world!We are building a web browser!PlatypusHeader');
   });
 
   it('ignores script tags', function() {
@@ -36,10 +34,10 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    expect(renderer.printContent(parsedHtml)).toEqual('Header\n' +
-                                                      'Hello world!\n' +
-                                                      'We are building a web browser!\n' +
-                                                      'Platypus\n');
+    renderer.printContent(parsedHtml, function(content) {
+      result += content;
+    });
+    expect(result).toEqual('HeaderHello world!We are building a web browser!Platypus');
   });
 
   it('ignores style tags', function() {
@@ -49,10 +47,10 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    expect(renderer.printContent(parsedHtml)).toEqual('Header\n' +
-                                                      'Hello world!\n' +
-                                                      'We are building a web browser!\n' +
-                                                      'Platypus\n');
+    renderer.printContent(parsedHtml, function(content) {
+      result += content;
+    });
+    expect(result).toEqual('HeaderHello world!We are building a web browser!Platypus');
   });
 
   it('ignores script tags with other tags inbetween', function() {
@@ -63,9 +61,10 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-    expect(renderer.printContent(parsedHtml)).toEqual('Header\n' +
-                                                      'Hello world!\n' +
-                                                      'We are building a web browser!\n' +
-                                                      'Platypus\n');
+
+    renderer.printContent(parsedHtml, function(content) {
+      result += content;
+    });
+    expect(result).toEqual('HeaderHello world!We are building a web browser!Platypus');
   });
 });
