@@ -67,4 +67,9 @@ describe('Renderer', function() {
     });
     expect(result).toEqual('HeaderHello world!We are building a web browser!Platypus');
   });
+
+  it('converts special characters into real characters', function() {
+    parsedHtml = 'Hello world&#x21; We are building a web browser&#x24; Platypus&#x23;';
+    expect(renderer.convertHtmlChars(parsedHtml)).toEqual('Hello world! We are building a web browser$ Platypus#');
+  });
 });
