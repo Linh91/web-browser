@@ -1,5 +1,4 @@
 function Renderer(){
-  this.htmlContent = '';
 }
 
 Renderer.prototype.printContent = function (parsedHtml, fn) {
@@ -14,10 +13,5 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
     }
   }
 };
-
-// Renderer.prototype.printContent = function (parsedHtml) {
-//   this._printContent(parsedHtml);
-//   return this.htmlContent;
-// }
 
 module.exports = Renderer;

@@ -57,7 +57,7 @@ describe('Renderer', function() {
     parsedHtml = ['<body>',
                  [ '<h1>', 'Header', '</h1>' ],
                  ['<script type="button">',
-                 ['<br>', [ '<p>', 'Some script text', '<p>'], '</script>']],
+                 ['<br>', 'Some script text', '</script>']],
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
