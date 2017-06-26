@@ -9,7 +9,7 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
                 /<[^>]*script\s*?/igm.test(parsedHtml[i - 1]) !== true &&
                 /<[^>]*script\s*?/igm.test(parsedHtml[i + 1]) !== true &&
                 /<[^>]*style\s*?/igm.test(parsedHtml[i - 1]) !== true ) {
-      fn(parsedHtml[i]);
+      fn(parsedHtml[i], parsedHtml[i-1]);
     }
   }
 };
