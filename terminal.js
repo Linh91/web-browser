@@ -1,9 +1,9 @@
-const blessed = require('blessed');
-const Browser = require('./src/Browser');
-const Graphic = require('./graphic');
+var blessed = require('blessed');
+const Browser = require('./src/Browser')
+const Graphic = require('./graphic')
 
 const graphic = new Graphic();
-const browser = new Browser();
+var browser = new Browser();
 
 var screen = blessed.screen({
   smartCSR: true
@@ -44,15 +44,14 @@ var display = blessed.box({
   mouse: true,
   key: true,
   style: {
-    fg: 'black',
+    fg: 'white',
   },
   border: {
-    type: 'line'
+  type: 'line'
   },
 });
 
 var linksBox = blessed.box({
-  content: 'Links:',
   top: '18%',
   height: '76%',
   width: '20%',
@@ -62,10 +61,10 @@ var linksBox = blessed.box({
   mouse: true,
   key: true,
   style: {
-    fg: 'black',
+    fg: 'white',
   },
   border: {
-    type: 'line'
+  type: 'line'
   },
 });
 
@@ -84,37 +83,13 @@ var addressBar = blessed.textbox({
   },
 });
 
-var links;
-
-var navigate = function(text) {
-  links = [];
-  display.setContent('');
-  linksBox.setContent('');
-  var linkCounter = 0
-  browser.visitPage(text, function(content, tag) {
-    if (/<[^>]*a href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + ' ') + content);
-      links.push(tag);
-      linkCounter += 1;
-    }
+addressBar.on('submit', (text) => {
+  browser.visitPage(text, function(content) {
     display.pushLine(content);
+    addressBar.focus();
     screen.render();
   });
-  addressBar.focus();
   addressBar.clearValue();
-}
-
-addressBar.on('submit', (text) => {
-
-  if(Number.isInteger(parseInt(text[0]))) {
-    var linkNum = parseInt(text[0]) - 1;
-    var openUrl = links[linkNum].indexOf('://') + 3;
-    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2);
-    text = cleanedLink;
-    navigate(text);
-  } else {
-    navigate(text);
-  }
 })
 
 // Append our box to the screen.
