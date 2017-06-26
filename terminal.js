@@ -83,12 +83,24 @@ var addressBar = blessed.textbox({
   },
 });
 
+// addressBar.on('submit', (text) => {
+//   browser.visitPage(text, function(tag, content) {
+//     addressBar.focus();
+//     screen.render();
+//   });
+//   addressBar.clearValue();
+// })
+
 addressBar.on('submit', (text) => {
-  browser.visitPage(text, function(content) {
+  display.setContent('');
+  browser.visitPage(text, function(tag, content) {
+    if (/<[^>]*a href\s*?/igm.test(tag)) {
+      linksBox.pushLine(content);
+    }
     display.pushLine(content);
-    addressBar.focus();
     screen.render();
   });
+  addressBar.focus();
   addressBar.clearValue();
 })
 
