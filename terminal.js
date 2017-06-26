@@ -52,6 +52,7 @@ var display = blessed.box({
 });
 
 var linksBox = blessed.box({
+  content: 'Links:',
   top: '18%',
   height: '76%',
   width: '20%',
@@ -83,19 +84,15 @@ var addressBar = blessed.textbox({
   },
 });
 
-// addressBar.on('submit', (text) => {
-//   browser.visitPage(text, function(tag, content) {
-//     addressBar.focus();
-//     screen.render();
-//   });
-//   addressBar.clearValue();
-// })
+var links = []
 
 addressBar.on('submit', (text) => {
   display.setContent('');
+  var linkCounter = 0
   browser.visitPage(text, function(tag, content) {
     if (/<[^>]*a href\s*?/igm.test(tag)) {
-      linksBox.pushLine(content);
+      linksBox.pushLine((linkCounter + 1 + ' ') + content);
+      linkCounter += 1
     }
     display.pushLine(content);
     screen.render();
