@@ -96,7 +96,7 @@ addressBar.on('submit', (text) => {
     var linkCounter = 0
     var cleanedLink = links[linkNum].slice(16, links[linkNum].length-2)
 
-    browser.visitPage(cleanedLink, function(tag, content) {
+    browser.visitPage(cleanedLink, function(content, tag) {
       if (/<[^>]*a href\s*?/igm.test(tag)) {
         linksBox.pushLine((linkCounter + 1 + ' ') + content);
         links.push(tag);
@@ -113,7 +113,7 @@ addressBar.on('submit', (text) => {
     display.setContent('');
     linksBox.setContent('');
     var linkCounter = 0
-    browser.visitPage(text, function(tag, content) {
+    browser.visitPage(text, function(content, tag) {
       if (/<[^>]*a href\s*?/igm.test(tag)) {
         linksBox.pushLine((linkCounter + 1 + ' ') + content);
         links.push(tag);
