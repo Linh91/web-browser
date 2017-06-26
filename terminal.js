@@ -92,7 +92,7 @@ var navigate = function(text) {
   linksBox.setContent('Links:');
   var linkCounter = 0
   browser.visitPage(text, function(content, tag) {
-    if (/<[^>]*a href\s*?/igm.test(tag)) {
+    if (/<[^>]*a* href\s*?/igm.test(tag)) {
       linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
       links.push(tag);
       linkCounter += 1;
