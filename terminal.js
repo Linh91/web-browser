@@ -93,12 +93,15 @@ var navigate = function(text) {
   var linkCounter = 0
   browser.visitPage(text, function(content, tag) {
     if (/<[^>]*a href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + ' ') + content);
+      linksBox.pushLine((linkCounter + 1 + ' ') + `{blue-fg}${content}{/}`);
       links.push(tag);
       linkCounter += 1;
+      display.pushLine(`{blue-fg}${content}{/} (${linkCounter})`);
+      screen.render();
+    } else {
+      display.pushLine(content);
+      screen.render();
     }
-    display.pushLine(content);
-    screen.render();
   });
   addressBar.focus();
   addressBar.clearValue();
