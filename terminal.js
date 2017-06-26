@@ -86,44 +86,34 @@ var addressBar = blessed.textbox({
 
 var links = []
 
+var navigate = function(text) {
+  display.setContent('');
+  linksBox.setContent('');
+  var linkCounter = 0
+  browser.visitPage(text, function(content, tag) {
+    if (/<[^>]*a href\s*?/igm.test(tag)) {
+      linksBox.pushLine((linkCounter + 1 + ' ') + content);
+      links.push(tag);
+      linkCounter += 1;
+    }
+    display.pushLine(content);
+    screen.render();
+  });
+  addressBar.focus();
+  addressBar.clearValue();
+}
+
 addressBar.on('submit', (text) => {
 
   if(Number.isInteger(parseInt(text[0]))) {
-    var linkNum = parseInt(text[0])-1
-
-    display.setContent('');
-    linksBox.setContent('');
-    var linkCounter = 0
-    var cleanedLink = links[linkNum].slice(16, links[linkNum].length-2)
-
-    browser.visitPage(cleanedLink, function(content, tag) {
-      if (/<[^>]*a href\s*?/igm.test(tag)) {
-        linksBox.pushLine((linkCounter + 1 + ' ') + content);
-        links.push(tag);
-        linkCounter += 1;
-      }
-      display.pushLine(content);
-      screen.render();
-    });
-    addressBar.focus();
-    addressBar.clearValue();
-
+    var linkNum = parseInt(text[0]) - 1;
+    var openUrl = links[linkNum].indexOf('://') + 3
+    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2)
+    
+    text = cleanedLink
+    navigate(text)
   } else {
-
-    display.setContent('');
-    linksBox.setContent('');
-    var linkCounter = 0
-    browser.visitPage(text, function(content, tag) {
-      if (/<[^>]*a href\s*?/igm.test(tag)) {
-        linksBox.pushLine((linkCounter + 1 + ' ') + content);
-        links.push(tag);
-        linkCounter += 1;
-      }
-      display.pushLine(content);
-      screen.render();
-    });
-    addressBar.focus();
-    addressBar.clearValue();
+    navigate(text)
   }
 })
 
