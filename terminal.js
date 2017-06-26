@@ -1,9 +1,9 @@
-var blessed = require('blessed');
-const Browser = require('./src/Browser')
-const Graphic = require('./graphic')
+const blessed = require('blessed');
+const Browser = require('./src/Browser');
+const Graphic = require('./graphic');
 
 const graphic = new Graphic();
-var browser = new Browser();
+const browser = new Browser();
 
 var screen = blessed.screen({
   smartCSR: true
@@ -84,9 +84,10 @@ var addressBar = blessed.textbox({
   },
 });
 
-var links = []
+var links;
 
 var navigate = function(text) {
+  links = [];
   display.setContent('');
   linksBox.setContent('');
   var linkCounter = 0
@@ -107,13 +108,12 @@ addressBar.on('submit', (text) => {
 
   if(Number.isInteger(parseInt(text[0]))) {
     var linkNum = parseInt(text[0]) - 1;
-    var openUrl = links[linkNum].indexOf('://') + 3
-    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2)
-    
-    text = cleanedLink
-    navigate(text)
+    var openUrl = links[linkNum].indexOf('://') + 3;
+    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2);
+    text = cleanedLink;
+    navigate(text);
   } else {
-    navigate(text)
+    navigate(text);
   }
 })
 
