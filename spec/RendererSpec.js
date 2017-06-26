@@ -63,6 +63,7 @@ describe('Renderer', function() {
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
 
     renderer.printContent(parsedHtml, function(content) {
+
       result += content;
     });
     expect(result).toEqual('HeaderHello world!We are building a web browser!Platypus');

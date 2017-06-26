@@ -16,6 +16,7 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
 
 Renderer.prototype.convertHtmlChars = function (htmlText) {
   return htmlText
+
     .replace(/&#x21;/g, "!")
     .replace(/&#x22;/g, "\"")
     .replace(/&#x23;/g, "#")
