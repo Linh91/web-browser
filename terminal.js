@@ -38,6 +38,24 @@ var pic = blessed.box({
 var display = blessed.box({
   top: '18%',
   height: '76%',
+  width: '80%',
+  scrollable: true,
+  tags: true,
+  mouse: true,
+  key: true,
+  style: {
+    fg: 'white',
+  },
+  border: {
+  type: 'line'
+  },
+});
+
+var linksBox = blessed.box({
+  top: '18%',
+  height: '76%',
+  width: '20%',
+  left: '80%',
   scrollable: true,
   tags: true,
   mouse: true,
@@ -77,6 +95,7 @@ addressBar.on('submit', (text) => {
 // Append our box to the screen.
 screen.append(title);
 screen.append(pic);
+screen.append(linksBox);
 screen.append(display);
 screen.append(addressBar);
 

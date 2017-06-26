@@ -14,4 +14,5 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
   }
 };
 
+
 module.exports = Renderer;
