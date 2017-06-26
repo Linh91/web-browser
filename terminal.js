@@ -44,10 +44,10 @@ var display = blessed.box({
   mouse: true,
   key: true,
   style: {
-    fg: 'white',
+    fg: 'black',
   },
   border: {
-  type: 'line'
+    type: 'line'
   },
 });
 
@@ -62,10 +62,10 @@ var linksBox = blessed.box({
   mouse: true,
   key: true,
   style: {
-    fg: 'white',
+    fg: 'black',
   },
   border: {
-  type: 'line'
+    type: 'line'
   },
 });
 
@@ -87,18 +87,44 @@ var addressBar = blessed.textbox({
 var links = []
 
 addressBar.on('submit', (text) => {
-  display.setContent('');
-  var linkCounter = 0
-  browser.visitPage(text, function(tag, content) {
-    if (/<[^>]*a href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + ' ') + content);
-      linkCounter += 1
-    }
-    display.pushLine(content);
-    screen.render();
-  });
-  addressBar.focus();
-  addressBar.clearValue();
+
+  if(Number.isInteger(parseInt(text[0]))) {
+    var linkNum = parseInt(text[0])-1
+
+    display.setContent('');
+    linksBox.setContent('');
+    var linkCounter = 0
+    var cleanedLink = links[linkNum].slice(16, links[linkNum].length-2)
+
+    browser.visitPage(cleanedLink, function(tag, content) {
+      if (/<[^>]*a href\s*?/igm.test(tag)) {
+        linksBox.pushLine((linkCounter + 1 + ' ') + content);
+        links.push(tag);
+        linkCounter += 1;
+      }
+      display.pushLine(content);
+      screen.render();
+    });
+    addressBar.focus();
+    addressBar.clearValue();
+
+  } else {
+
+    display.setContent('');
+    linksBox.setContent('');
+    var linkCounter = 0
+    browser.visitPage(text, function(tag, content) {
+      if (/<[^>]*a href\s*?/igm.test(tag)) {
+        linksBox.pushLine((linkCounter + 1 + ' ') + content);
+        links.push(tag);
+        linkCounter += 1;
+      }
+      display.pushLine(content);
+      screen.render();
+    });
+    addressBar.focus();
+    addressBar.clearValue();
+  }
 })
 
 // Append our box to the screen.
