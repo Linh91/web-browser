@@ -89,7 +89,7 @@ var links;
 var navigate = function(text) {
   links = [];
   display.setContent('');
-  linksBox.setContent('');
+  linksBox.setContent('Links:');
   var linkCounter = 0
   browser.visitPage(text, function(content, tag) {
     if (/<[^>]*a href\s*?/igm.test(tag)) {
