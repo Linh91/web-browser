@@ -26,5 +26,6 @@ Renderer.prototype.convertHtmlChars = function (htmlText) {
     .replace(/&#x28;/g, "(")
     .replace(/&#x29;/g, ")")
     .replace(/&copy;/g, "©")
+    .replace(/&amp;/g, "&")
 };
 module.exports = Renderer;
