@@ -107,6 +107,8 @@ var navigate = function(text) {
       linkCounter += 1;
       display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
       screen.render();
+    } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
+        display.pushLine('{bold}' + content + '{/bold}')
     } else {
       display.pushLine(content);
       screen.render();
