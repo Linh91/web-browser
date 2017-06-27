@@ -89,33 +89,47 @@ var links;
 var navigate = function(text) {
   links = [];
   display.setContent('');
-  linksBox.setContent('');
+  linksBox.setContent('Links:');
   var linkCounter = 0
   browser.visitPage(text, function(content, tag) {
-    if (/<[^>]*a href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + ' ') + content);
-      links.push(tag);
+    if (/<[^>]*a* href\s*?/igm.test(tag)) {
+      linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
+      if (tag.includes('http')) {
+        links.push(tag);
+      } else {
+        var openTagIndex = tag.indexOf('href=') + 6
+        if ( text.includes('/')) {
+          var baseUrl = text.indexOf('/')
+          text = text.slice(0, baseUrl)
+        }
+        links.push(text + tag.slice(openTagIndex, tag.length))
+      }
       linkCounter += 1;
+      display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
+      screen.render();
+    } else {
+      display.pushLine(content);
+      screen.render();
     }
-    display.pushLine(content);
-    screen.render();
   });
   addressBar.focus();
   addressBar.clearValue();
 }
 
 addressBar.on('submit', (text) => {
-
   if(Number.isInteger(parseInt(text[0]))) {
-    var linkNum = parseInt(text[0]) - 1;
-    var openUrl = links[linkNum].indexOf('://') + 3;
+    var linkNum = parseInt(text) - 1;
+    var openUrl = 0
+    if (links[linkNum].includes('://')) {
+      openUrl = links[linkNum].indexOf('://') + 3;
+    }
     var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2);
     text = cleanedLink;
     navigate(text);
   } else {
     navigate(text);
   }
-})
+});
 
 // Append our box to the screen.
 screen.append(title);
