@@ -106,6 +106,7 @@ var navigate = function(text) {
       }
       linkCounter += 1;
       display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
+      linksBox.pushLine(text + tag.slice(openTagIndex, tag.length))
       screen.render();
     } else {
       display.pushLine(content);
@@ -123,7 +124,8 @@ addressBar.on('submit', (text) => {
     if (links[linkNum].includes('://')) {
       openUrl = links[linkNum].indexOf('://') + 3;
     }
-    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2);
+    var endUrl = links[linkNum].indexOf('"');
+    var cleanedLink = links[linkNum].slice(openUrl, endUrl);
     text = cleanedLink;
     navigate(text);
   } else {
