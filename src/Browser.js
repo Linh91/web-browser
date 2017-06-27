@@ -8,10 +8,23 @@ function Browser() {
 
 Browser.prototype.visitPage = function(webUrl, fn) {
    this.requester.fetcher(webUrl, function(source) {
+    if (source.includes('The document has moved')) {
+      var browser, urlStart, urlEnd, redirectedUrl;
+      browser = new Browser();
+      browser._redirect(source, fn);
+    } else {
     var parser = new Parser(source);
     var renderer = new Renderer();
     renderer.printContent(parser.parsedHtml(), fn);
+  }
   });
+};
+
+Browser.prototype._redirect = function(response, fn) {
+  urlStart = response.indexOf('://') + 3;
+  urlEnd = response.indexOf('">', urlStart);
+  redirectedUrl = response.slice(urlStart, urlEnd);
+  return this.visitPage(redirectedUrl, fn);
 };
 
 module.exports = Browser;
