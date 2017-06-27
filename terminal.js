@@ -94,26 +94,25 @@ var navigate = function(text) {
   browser.visitPage(text, function(content, tag) {
     if (/<[^>]*a* href\s*?/igm.test(tag)) {
       linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
+      var startTag = tag.indexOf('href=');
+      tag = tag.slice(startTag, tag.length)
+      var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
+      tag = tag.slice(0, endTag + 2)
+      var starHtml = "<a "
+      tag = starHtml + tag
       if (tag.includes('http')) {
-        // var startTag = tag.indexOf('href=');
-        // tag = tag.slice(startTag, tag.length)
-        // var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
-        // tag = tag.slice(0, endTag + 2)
-        // var starHtml = "<a "
-        // tag = starHtml + tag
         links.push(tag);
       } else {
         var openTagIndex = tag.indexOf('href=') + 6
-        var closeBase = tag.indexOf('"', tag.indexOf('"') + 1 )
         if ( text.includes('/')) {
           var baseUrl = text.indexOf('/')
           text = text.slice(0, baseUrl)
         }
-        links.push(text + tag.slice(openTagIndex, closeBase))
+        links.push(text + tag.slice(openTagIndex, tag.length))
       }
       linkCounter += 1;
       display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
-      linksBox.pushLine(text + tag.slice(openTagIndex, closeBase))
+      linksBox.pushLine(text + tag)
       screen.render();
     } else {
       display.pushLine(content);
