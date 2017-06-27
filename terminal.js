@@ -98,8 +98,10 @@ var navigate = function(text) {
         links.push(tag);
       } else {
         var openTagIndex = tag.indexOf('href=') + 6
-        var baseUrl = text.indexOf('/')
-        linksBox.pushLine(text + tag.slice(openTagIndex, tag.length))
+        if ( text.includes('/')) {
+          var baseUrl = text.indexOf('/')
+          text = text.slice(0, baseUrl)
+        }
         links.push(text + tag.slice(openTagIndex, tag.length))
       }
       linkCounter += 1;
