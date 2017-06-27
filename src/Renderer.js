@@ -9,10 +9,23 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
                 /<[^>]*script\s*?/igm.test(parsedHtml[i - 1]) !== true &&
                 /<[^>]*script\s*?/igm.test(parsedHtml[i + 1]) !== true &&
                 /<[^>]*style\s*?/igm.test(parsedHtml[i - 1]) !== true ) {
-      fn(parsedHtml[i], parsedHtml[i-1]);
+      fn(this.convertHtmlChars(parsedHtml[i]), parsedHtml[i-1]);
     }
   }
 };
 
-
+Renderer.prototype.convertHtmlChars = function (htmlText) {
+  return htmlText
+    .replace(/&#x21;/g, "!")
+    .replace(/&#x22;/g, "\"")
+    .replace(/&#x23;/g, "#")
+    .replace(/&#x24;/g, "$")
+    .replace(/&#x25;/g, "%")
+    .replace(/&#x26;/g, "&")
+    .replace(/&#x27;/g, "'")
+    .replace(/&#x28;/g, "(")
+    .replace(/&#x29;/g, ")")
+    .replace(/&copy;/g, "©")
+    .replace(/&amp;/g, "&")
+};
 module.exports = Renderer;
