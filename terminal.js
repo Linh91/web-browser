@@ -94,7 +94,14 @@ var navigate = function(text) {
   browser.visitPage(text, function(content, tag) {
     if (/<[^>]*a* href\s*?/igm.test(tag)) {
       linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
-      links.push(tag);
+      if (tag.includes('http')) {
+        links.push(tag);
+      } else {
+        var openTagIndex = tag.indexOf('href=') + 6
+        var baseUrl = text.indexOf('/')
+        linksBox.pushLine(text + tag.slice(openTagIndex, tag.length))
+        links.push(text + tag.slice(openTagIndex, tag.length))
+      }
       linkCounter += 1;
       display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
       screen.render();
@@ -108,17 +115,19 @@ var navigate = function(text) {
 }
 
 addressBar.on('submit', (text) => {
-
   if(Number.isInteger(parseInt(text[0]))) {
-    var linkNum = parseInt(text[0]) - 1;
-    var openUrl = links[linkNum].indexOf('://') + 3;
+    var linkNum = parseInt(text) - 1;
+    var openUrl = 0
+    if (links[linkNum].includes('://')) {
+      openUrl = links[linkNum].indexOf('://') + 3;
+    }
     var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2);
     text = cleanedLink;
     navigate(text);
   } else {
     navigate(text);
   }
-})
+});
 
 // Append our box to the screen.
 screen.append(title);
