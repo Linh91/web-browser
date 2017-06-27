@@ -1,7 +1,7 @@
 const Renderer = require('../src/Renderer.js')
 
 describe('Renderer', function() {
-  var originalLog, parsedHtml, result, renderer;
+  var originalLog, parsedHtml, result, renderer, tag;
 
   beforeEach(function() {
     renderer = new Renderer();
@@ -71,5 +71,13 @@ describe('Renderer', function() {
   it('converts special characters into real characters', function() {
     parsedHtml = 'Hello world&#x21; We are building a web browser&#x24; Platypus&#x23;';
     expect(renderer.convertHtmlChars(parsedHtml)).toEqual('Hello world! We are building a web browser$ Platypus#');
+  });
+
+  it('associates link tags with content deeply nested inside them', function() {
+    parsedHtml = ['<a href="xyz">', ['<span>', 'some text', '</span>'], '</a>']
+    renderer.printContent(parsedHtml, function(content, tag) {
+      result = content + tag
+    });
+    expect(result).toEqual('some text<a href="xyz">')
   });
 });
