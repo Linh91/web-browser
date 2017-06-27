@@ -95,18 +95,25 @@ var navigate = function(text) {
     if (/<[^>]*a* href\s*?/igm.test(tag)) {
       linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
       if (tag.includes('http')) {
+        // var startTag = tag.indexOf('href=');
+        // tag = tag.slice(startTag, tag.length)
+        // var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
+        // tag = tag.slice(0, endTag + 2)
+        // var starHtml = "<a "
+        // tag = starHtml + tag
         links.push(tag);
       } else {
         var openTagIndex = tag.indexOf('href=') + 6
+        var closeBase = tag.indexOf('"', tag.indexOf('"') + 1 )
         if ( text.includes('/')) {
           var baseUrl = text.indexOf('/')
           text = text.slice(0, baseUrl)
         }
-        links.push(text + tag.slice(openTagIndex, tag.length))
+        links.push(text + tag.slice(openTagIndex, closeBase))
       }
       linkCounter += 1;
       display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
-      linksBox.pushLine(text + tag.slice(openTagIndex, tag.length))
+      linksBox.pushLine(text + tag.slice(openTagIndex, closeBase))
       screen.render();
     } else {
       display.pushLine(content);
@@ -124,8 +131,7 @@ addressBar.on('submit', (text) => {
     if (links[linkNum].includes('://')) {
       openUrl = links[linkNum].indexOf('://') + 3;
     }
-    var endUrl = links[linkNum].indexOf('"');
-    var cleanedLink = links[linkNum].slice(openUrl, endUrl);
+    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2);
     text = cleanedLink;
     navigate(text);
   } else {
