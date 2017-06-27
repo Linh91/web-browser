@@ -94,6 +94,12 @@ var navigate = function(text) {
   browser.visitPage(text, function(content, tag) {
     if (/<[^>]*a* href\s*?/igm.test(tag)) {
       linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
+      var startTag = tag.indexOf('href=');
+      tag = tag.slice(startTag, tag.length)
+      var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
+      tag = tag.slice(0, endTag + 2)
+      var starHtml = "<a "
+      tag = starHtml + tag
       if (tag.includes('http')) {
         links.push(tag);
       } else {
@@ -106,6 +112,7 @@ var navigate = function(text) {
       }
       linkCounter += 1;
       display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
+      linksBox.pushLine(text + tag)
       screen.render();
     } else {
       display.pushLine(content);

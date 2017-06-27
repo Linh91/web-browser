@@ -6,7 +6,7 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
   for ( var i = 0; i < parsedHtml.length; i++ ) {
     if (Array.isArray(parsedHtml[i])) {
       this.printContent(parsedHtml[i], fn);
-    } else if ( /<[^>]*a\s*?/igm.test(parsedHtml[i]) === true &&
+    } else if ( /<[^>]*a* href\s*?/igm.test(parsedHtml[i]) === true &&
     (Array.isArray(parsedHtml[i + 1]))) {
       this.openATag = parsedHtml[i]
     } else if ( parsedHtml[i][0] !== '<' &&
