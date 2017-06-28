@@ -8,9 +8,9 @@ function Browser() {
 
 Browser.prototype.visitPage = function(webUrl, fn) {
    this.requester.fetcher(webUrl, function(source) {
-    var parser = new Parser(source);
+    var parser = new Parser();
     var renderer = new Renderer();
-    renderer.printContent(parser.parsedHtml(), fn);
+    renderer.printContent(parser.parseHtml(source), fn);
   });
 };
 
