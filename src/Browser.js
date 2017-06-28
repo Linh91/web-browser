@@ -8,10 +8,24 @@ function Browser() {
 
 Browser.prototype.visitPage = function(userInput, fn) {
    this.requester.getRequest(userInput, function(response) {
-    var parser = new Parser(response);
-    var renderer = new Renderer();
-    renderer.printContent(parser.parsedHtml(), fn);
+    if (response.includes('The document has moved')) {
+      var browser;
+      browser = new Browser();
+      browser._redirect(response, fn);
+    } else {
+      var parser = new Parser(response);
+      var renderer = new Renderer();
+      renderer.printContent(parser.parsedHtml(), fn);
+    }
   });
+};
+
+Browser.prototype._redirect = function(response, fn) {
+  var urlStart, urlEnd, redirectedUrl;
+  urlStart = response.indexOf('://') + 3;
+  urlEnd = response.indexOf('">', urlStart);
+  redirectedUrl = response.slice(urlStart, urlEnd);
+  return this.visitPage(redirectedUrl, fn);
 };
 
 module.exports = Browser;
