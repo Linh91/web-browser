@@ -2,13 +2,13 @@ var http = require('http');
 
 function Requester() {}
 
-Requester.prototype.fetcher = function (webUrl, fn) {
+Requester.prototype.fetcher = function (userInput, fn) {
   var page = '';
 
   var options = {
-    host: webUrl.split('/')[0],
+    host: userInput.split('/')[0],
     port: 80,
-    path: this._getPath(webUrl)
+    path: this._getPath(userInput)
   };
 
   http.get(options, function(resp) {
@@ -24,11 +24,11 @@ Requester.prototype.fetcher = function (webUrl, fn) {
   });
 };
 
-Requester.prototype._getPath = function (webUrl) {
-  var webUrlArray = webUrl.split('/');
+Requester.prototype._getPath = function (userInput) {
+  var userInputArray = userInput.split('/');
 
-  if ( webUrl.split('/')[1] ) {
-    return '/' + webUrlArray.slice(1, webUrlArray.length).join('/');
+  if ( userInput.split('/')[1] ) {
+    return '/' + userInputArray.slice(1, userInputArray.length).join('/');
   } else {
     return '/';
   }
