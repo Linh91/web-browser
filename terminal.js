@@ -104,13 +104,17 @@ addressBar.on('submit', (text) => {
 
 var navigate = function(text) {
   url = text
+  clearData()
+  browser.visitPage(text, callBack);
+  addressBar.clearValue();
+  addressBar.focus();
+}
+
+var clearData = function() {
   display.setContent('');
   linksBox.setContent('Links:');
   links = [];
   linkCounter = 0
-  browser.visitPage(text, callBack);
-  addressBar.clearValue();
-  addressBar.focus();
 }
 
 var callBack = function(content, tag) {
