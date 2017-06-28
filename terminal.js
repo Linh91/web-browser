@@ -90,27 +90,23 @@ var navigate = function(text) {
   links = [];
   display.setContent('');
   linksBox.setContent('Links:');
-  var linkCounter = 0
+  var linkCounter = 0;
   browser.visitPage(text, function(content, tag) {
     if (/<[^>]*a* href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
-      var startTag = tag.indexOf('href=');
-      tag = tag.slice(startTag, tag.length)
-      var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
-      tag = tag.slice(0, endTag + 2)
-      var starHtml = "<a "
-      tag = starHtml + tag
+      linkCounter++;
+      linksBox.pushLine((linkCounter + '. ') + `{blue-fg}{underline}${content}{/}`);
+      var startTag = tag.indexOf('href=') + 6;
+      var endTag = tag.indexOf('"', startTag )
+      tag = tag.slice(startTag, endTag)
       if (tag.includes('http')) {
         links.push(tag);
       } else {
-        var openTagIndex = tag.indexOf('href=') + 6
         if ( text.includes('/')) {
           var baseUrl = text.indexOf('/')
           text = text.slice(0, baseUrl)
         }
-        links.push(text + tag.slice(openTagIndex, tag.length))
+        links.push(text + tag)
       }
-      linkCounter += 1;
       display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
       screen.render();
     } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
@@ -131,7 +127,7 @@ addressBar.on('submit', (text) => {
     if (links[linkNum].includes('://')) {
       openUrl = links[linkNum].indexOf('://') + 3;
     }
-    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length - 2);
+    var cleanedLink = links[linkNum].slice(openUrl, links[linkNum].length);
     text = cleanedLink;
     navigate(text);
   } else {
