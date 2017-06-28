@@ -4,6 +4,8 @@ const Graphic = require('./graphic');
 
 const graphic = new Graphic();
 const browser = new Browser();
+var links, linkCounter, url;
+
 
 var screen = blessed.screen({
   smartCSR: true
@@ -84,45 +86,6 @@ var addressBar = blessed.textbox({
   },
 });
 
-var links;
-
-var navigate = function(text) {
-  links = [];
-  display.setContent('');
-  linksBox.setContent('Links:');
-  var linkCounter = 0
-  browser.visitPage(text, function(content, tag) {
-    if (/<[^>]*a* href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
-      var startTag = tag.indexOf('href=');
-      tag = tag.slice(startTag, tag.length)
-      var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
-      tag = tag.slice(0, endTag + 2)
-      var starHtml = "<a "
-      tag = starHtml + tag
-      if (tag.includes('http')) {
-        links.push(tag);
-      } else {
-        var openTagIndex = tag.indexOf('href=') + 6
-        if ( text.includes('/')) {
-          var baseUrl = text.indexOf('/')
-          text = text.slice(0, baseUrl)
-        }
-        links.push(text + tag.slice(openTagIndex, tag.length))
-      }
-      linkCounter += 1;
-      display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
-      screen.render();
-    } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
-        display.pushLine('{bold}' + content + '{/bold}')
-    } else {
-      display.pushLine(content);
-      screen.render();
-    }
-  });
-  addressBar.focus();
-  addressBar.clearValue();
-}
 
 addressBar.on('submit', (text) => {
   if(Number.isInteger(parseInt(text[0]))) {
@@ -138,6 +101,49 @@ addressBar.on('submit', (text) => {
     navigate(text);
   }
 });
+
+var navigate = function(text) {
+  url = text
+  display.setContent('');
+  linksBox.setContent('Links:');
+  links = [];
+  linkCounter = 0
+  browser.visitPage(text, callBack);
+  addressBar.clearValue();
+  addressBar.focus();
+}
+
+var callBack = function(content, tag) {
+    if (/<[^>]*a* href\s*?/igm.test(tag)) {
+      linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
+      var startTag = tag.indexOf('href=');
+      tag = tag.slice(startTag, tag.length)
+      var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
+      tag = tag.slice(0, endTag + 2)
+      var starHtml = "<a "
+      tag = starHtml + tag
+      if (tag.includes('http')) {
+        links.push(tag);
+      } else {
+        var openTagIndex = tag.indexOf('href=') + 6
+        if ( url.includes('/')) {
+          var baseUrl = url.indexOf('/')
+          url = url.slice(0, baseUrl)
+        }
+        links.push(url + tag.slice(openTagIndex, tag.length))
+      }
+      linkCounter += 1;
+      display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
+      screen.render();
+    } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
+        display.pushLine('{bold}' + content + '{/bold}')
+    } else {
+      display.pushLine(content);
+      screen.render();
+    }
+  }
+
+
 
 // Append our box to the screen.
 screen.append(title);
