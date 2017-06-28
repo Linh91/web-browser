@@ -29,25 +29,27 @@ Parser.prototype._cleanHtml = function () {
 // while loop, which is looping till finds a close tag for the line
 
 Parser.prototype._parse = function () {
-  var nextLine = [];
-  nextLine.push(this._getOpenTag());
-  nextLine.push(this._getContent());
-  nextLine.push(this._getCloseTag());
-  while (Array.isArray(nextLine[nextLine.length - 1])) {
-    nextLine.push(this._getCloseTag());
+  var parsedHtmlArray;
+
+  parsedHtmlArray = [];
+  parsedHtmlArray.push(this._openTag());
+  parsedHtmlArray.push(this._innerContent());
+  parsedHtmlArray.push(this._closeTag());
+  while (Array.isArray(parsedHtmlArray[parsedHtmlArray.length - 1])) {
+    parsedHtmlArray.push(this._closeTag());
   }
-  return nextLine;
+  return parsedHtmlArray;
 };
 
-Parser.prototype._getOpenTag = function () {
+Parser.prototype._openTag = function () {
   var endIndex = this.htmlCharacters.indexOf('>');
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
 
 //looking for a close tag, but if it finds an opentag, it starts a new line
 
-Parser.prototype._getCloseTag = function () {
-  if (this._openTag()) {
+Parser.prototype._closeTag = function () {
+  if (this._isOpenTag()) {
     return this._parse();
   }
   var endIndex = this.htmlCharacters.indexOf('>');
@@ -56,15 +58,15 @@ Parser.prototype._getCloseTag = function () {
 
 //looking for content, but if it finds an opentag, it starts a new line
 
-Parser.prototype._getContent = function () {
-  if (this._openTag()) {
+Parser.prototype._innerContent = function () {
+  if (this._isOpenTag()) {
     return this._parse();
   }
   var endIndex = this.htmlCharacters.indexOf('<');
   return this.htmlCharacters.splice(0, endIndex).join('');
 };
 
-Parser.prototype._openTag = function () {
+Parser.prototype._isOpenTag = function () {
   return this.htmlCharacters[0] === '<' && this.htmlCharacters[1] !== '/';
 };
 
