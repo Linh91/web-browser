@@ -119,19 +119,14 @@ var clearData = function() {
 
 var callBack = function(content, tag) {
   if (/<[^>]*a* href\s*?/igm.test(tag)) {
-    linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
-    var startTag = tag.indexOf('href=');
-    tag = tag.slice(startTag, tag.length)
-    var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
-    tag = tag.slice(0, endTag + 2)
-    var starHtml = "<a "
-    tag = starHtml + tag
     pushLinkToArray(tag, url);
-    linkCounter += 1;
+    linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
     display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
     screen.render();
+    linkCounter += 1;
   } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
     display.pushLine('{bold}' + content + '{/bold}')
+    screen.render();
   } else {
     display.pushLine(content);
     screen.render();
@@ -139,6 +134,11 @@ var callBack = function(content, tag) {
 }
 
 var pushLinkToArray = function(tag, url) {
+  var startTag = tag.indexOf('href=');
+  tag = tag.slice(startTag, tag.length)
+  var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
+  tag = tag.slice(0, endTag + 2)
+  var startHtml = "<a "
   if (tag.includes('http')) {
     links.push(tag);
   } else {
@@ -147,14 +147,11 @@ var pushLinkToArray = function(tag, url) {
       var baseUrl = url.indexOf('/')
       url = url.slice(0, baseUrl)
     }
+    tag = startHtml + tag
     links.push(url + tag.slice(openTagIndex, tag.length))
   };
 };
 
-
-
-
-// Append our box to the screen.
 screen.append(title);
 screen.append(pic);
 screen.append(linksBox);
@@ -165,5 +162,4 @@ screen.key(['escape'], function(ch, key) {
   return process.exit(0);
 });
 
-// Render the screen.
 screen.render();
