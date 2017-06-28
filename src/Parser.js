@@ -67,9 +67,10 @@ Parser.prototype._innerContent = function () {
 };
 
 Parser.prototype._isOpenTag = function () {
-  return this.htmlCharacters[0] === '<' && this.htmlCharacters[1] !== '/';
+  var htmlString;
+
+  htmlString = this.htmlCharacters.join('').split('>').join('>\n').split('\n')[0];
+  return /<\s*?\w*\s*?>/igm.test(htmlString);
 };
-
-
 
 module.exports = Parser;
