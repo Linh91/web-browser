@@ -118,34 +118,39 @@ var clearData = function() {
 }
 
 var callBack = function(content, tag) {
-    if (/<[^>]*a* href\s*?/igm.test(tag)) {
-      linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
-      var startTag = tag.indexOf('href=');
-      tag = tag.slice(startTag, tag.length)
-      var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
-      tag = tag.slice(0, endTag + 2)
-      var starHtml = "<a "
-      tag = starHtml + tag
-      if (tag.includes('http')) {
-        links.push(tag);
-      } else {
-        var openTagIndex = tag.indexOf('href=') + 6
-        if ( url.includes('/')) {
-          var baseUrl = url.indexOf('/')
-          url = url.slice(0, baseUrl)
-        }
-        links.push(url + tag.slice(openTagIndex, tag.length))
-      }
-      linkCounter += 1;
-      display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
-      screen.render();
-    } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
-        display.pushLine('{bold}' + content + '{/bold}')
-    } else {
-      display.pushLine(content);
-      screen.render();
-    }
+  if (/<[^>]*a* href\s*?/igm.test(tag)) {
+    linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
+    var startTag = tag.indexOf('href=');
+    tag = tag.slice(startTag, tag.length)
+    var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
+    tag = tag.slice(0, endTag + 2)
+    var starHtml = "<a "
+    tag = starHtml + tag
+    pushLinkToArray(tag, url);
+    linkCounter += 1;
+    display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
+    screen.render();
+  } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
+    display.pushLine('{bold}' + content + '{/bold}')
+  } else {
+    display.pushLine(content);
+    screen.render();
   }
+}
+
+var pushLinkToArray = function(tag, url) {
+  if (tag.includes('http')) {
+    links.push(tag);
+  } else {
+    var openTagIndex = tag.indexOf('href=') + 6
+    if ( url.includes('/')) {
+      var baseUrl = url.indexOf('/')
+      url = url.slice(0, baseUrl)
+    }
+    links.push(url + tag.slice(openTagIndex, tag.length))
+  };
+};
+
 
 
 
