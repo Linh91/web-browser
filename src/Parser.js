@@ -1,8 +1,30 @@
-function Parser(htmlString) {
-  this.htmlString = htmlString;
+function Parser() {
+  this.response;
+}
+
+Parser.prototype.parseHtml = function (response) {
+  this.response = response;
   this._chopPreBody();
   this.htmlCharacters = this._cleanHtml();
-}
+  return this._parseNextElement();
+};
+
+Parser.prototype._chopPreBody = function () {
+  var bodyRegex, bodyTag;
+
+  bodyRegex = /<\s*?body\s*?>/igm;
+  bodyTag = bodyRegex.exec(this.response);
+  if (bodyTag) {
+    this.response = this.response.substring(bodyTag.index);
+  }
+};
+
+// removes \n charachters, cleans tabs and returns the array of characters
+Parser.prototype._cleanHtml = function () {
+  this.response = this.response.replace(/[\n\r]/g, '');
+  this.response = this.response.split(/>[\s]*</g).join('><');
+  return this.response.split('');
+};
 
 // Controls the parsing, recursive, and can handle multiple childs in a line with the
 // while loop, which is looping till finds a close tag for the line
@@ -28,22 +50,12 @@ Parser.prototype._getCloseTag = function () {
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
 
-Parser.prototype.parsedHtml = function () {
-  return this._parseNextElement();
-};
 
 Parser.prototype._getOpenTag = function () {
   var endIndex = this.htmlCharacters.indexOf('>');
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
 
-Parser.prototype._chopPreBody = function () {
-  var bodyRegex = /<\s*?body\s*?>/igm;
-  var bodyTag = bodyRegex.exec(this.htmlString);
-  if(bodyTag !== null) {
-    this.htmlString = this.htmlString.substring(bodyTag.index);
-  }
-};
 
 //looking for content, but if it finds an opentag, it starts a new line
 
@@ -59,12 +71,6 @@ Parser.prototype._openTag = function () {
   return this.htmlCharacters[0] === '<' && this.htmlCharacters[1] !== '/';
 };
 
-// removes \n charachters, cleans tabs and returns the array of characters
 
-Parser.prototype._cleanHtml = function () {
-  this.htmlString = this.htmlString.replace(/[\n\r]/g, '');
-  this.htmlString = this.htmlString.split(/>[\s]*</g).join('><');
-  return this.htmlString.split('');
-};
 
 module.exports = Parser;
