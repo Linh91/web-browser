@@ -1,5 +1,8 @@
+const HtmlEntitiesDecoder = require('./HtmlEntitiesDecoder.js');
+
 function Renderer(){
   this.openATag = false
+  this.htmlEntitiesDecoder = new HtmlEntitiesDecoder();
 }
 
 Renderer.prototype.printContent = function (parsedHtml, fn) {
@@ -14,27 +17,13 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
     /<[^>]*script\s*?/igm.test(parsedHtml[i + 1]) !== true &&
     /<[^>]*style\s*?/igm.test(parsedHtml[i - 1]) !== true ) {
       if(this.openATag === false) {
-        fn(this.convertHtmlChars(parsedHtml[i]), parsedHtml[i-1]);
+        fn(this.htmlEntitiesDecoder(parsedHtml[i]), parsedHtml[i-1]);
       } else {
-        fn(this.convertHtmlChars(parsedHtml[i]), this.openATag);
+        fn(this.htmlEntitiesDecoder(parsedHtml[i]), this.openATag);
         this.openATag = false
       }
     }
   }
 };
 
-Renderer.prototype.convertHtmlChars = function (htmlText) {
-  return htmlText
-  .replace(/&#x21;/g, "!")
-  .replace(/&#x22;/g, "\"")
-  .replace(/&#x23;/g, "#")
-  .replace(/&#x24;/g, "$")
-  .replace(/&#x25;/g, "%")
-  .replace(/&#x26;/g, "&")
-  .replace(/&#x27;/g, "'")
-  .replace(/&#x28;/g, "(")
-  .replace(/&#x29;/g, ")")
-  .replace(/&copy;/g, "©")
-  .replace(/&amp;/g, "&")
-};
 module.exports = Renderer;
