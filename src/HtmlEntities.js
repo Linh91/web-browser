@@ -1,8 +1,8 @@
-function HtmlEntitiesDecoder() {
+function HtmlEntities() {
 
 };
 
-HtmlEntitiesDecoder.prototype.convertHtmlChars = function (htmlText) {
+HtmlEntities.prototype.decoder = function (htmlText) {
   return htmlText
   .replace(/&#x21;/g, "!")
   .replace(/&#x22;/g, "\"")
@@ -17,4 +17,4 @@ HtmlEntitiesDecoder.prototype.convertHtmlChars = function (htmlText) {
   .replace(/&amp;/g, "&")
 };
 
-module.exports = HtmlEntitiesDecoder;
+module.exports = HtmlEntities;

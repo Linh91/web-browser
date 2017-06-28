@@ -69,8 +69,13 @@ describe('Renderer', function() {
   });
 
   it('converts special characters into real characters', function() {
-    parsedHtml = 'Hello world&#x21; We are building a web browser&#x24; Platypus&#x23;';
-    expect(renderer.convertHtmlChars(parsedHtml)).toEqual('Hello world! We are building a web browser$ Platypus#');
+    parsedHtml = ['<body>',
+                 ['<p>', 'Hello world&#x21;', '</p>'],
+                 [ '<p>', 'Platypus', '</p>' ], '</body>'],
+    renderer.printContent(parsedHtml, function(content) {
+      result += content;
+    });
+    expect(result).toEqual('Hello world!Platypus');
   });
 
   it('associates link tags with content deeply nested inside them', function() {

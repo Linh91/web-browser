@@ -1,10 +1,10 @@
-const HtmlEntitiesDecoder = require('../src/HtmlEntitiesDecoder.js');
+const HtmlEntities = require('../src/HtmlEntities.js');
 
-describe('HtmlEntitiesDecoder', function() {
-  var decoder = new HtmlEntitiesDecoder();
+describe('HtmlEntities', function() {
+  var htmlEntities = new HtmlEntities();
 
   it('returns a string without html special characters', function() {
     string = "More Britons &#x27;back tax and spend&#x27;"
-    expect(decoder.convertHtmlChars(string)).toEqual("More Britons 'back tax and spend'")
-  })
-})
+    expect(htmlEntities.decoder(string)).toEqual("More Britons 'back tax and spend'")
+  });
+});

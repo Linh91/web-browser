@@ -1,8 +1,8 @@
-const HtmlEntitiesDecoder = require('./HtmlEntitiesDecoder.js');
+const HtmlEntities = require('./HtmlEntities.js');
 
 function Renderer(){
   this.openATag = false
-  this.htmlEntitiesDecoder = new HtmlEntitiesDecoder();
+  this.htmlEntities = new HtmlEntities();
 }
 
 Renderer.prototype.printContent = function (parsedHtml, fn) {
@@ -17,9 +17,9 @@ Renderer.prototype.printContent = function (parsedHtml, fn) {
     /<[^>]*script\s*?/igm.test(parsedHtml[i + 1]) !== true &&
     /<[^>]*style\s*?/igm.test(parsedHtml[i - 1]) !== true ) {
       if(this.openATag === false) {
-        fn(this.htmlEntitiesDecoder(parsedHtml[i]), parsedHtml[i-1]);
+        fn(this.htmlEntities.decoder(parsedHtml[i]), parsedHtml[i-1]);
       } else {
-        fn(this.htmlEntitiesDecoder(parsedHtml[i]), this.openATag);
+        fn(this.htmlEntities.decoder(parsedHtml[i]), this.openATag);
         this.openATag = false
       }
     }
