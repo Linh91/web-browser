@@ -1,15 +1,23 @@
-var http = require('http');
+const http = require('http');
 
 function Requester() {}
 
-Requester.prototype.fetcher = function (webUrl, fn) {
-  var page = '';
+Requester.prototype.getRequest = function (userInput, fn) {
+  var options;
 
-  var options = {
-    host: webUrl.split('/')[0],
-    port: 80,
-    path: this._getPath(webUrl)
+  options = {
+    'host': userInput.split('/')[0],
+    'path': this._getPath(userInput),
+    'port': 80
   };
+
+  this._fetcher(options, fn);
+};
+
+Requester.prototype._fetcher = function(options, fn) {
+  var page;
+
+  page = '';
 
   http.get(options, function(resp) {
     resp.setEncoding('utf8');
@@ -18,20 +26,19 @@ Requester.prototype.fetcher = function (webUrl, fn) {
     });
     resp.on('end', function() {
       fn(page);
-    })
-  }).on("error", function(e){
-    console.log("Got error: " + e.message);
+    });
+  }).on("error", function(err) {
+    console.log(`Got error: ${err.message}`);
   });
-};
+}
 
-Requester.prototype._getPath = function (webUrl) {
-  var webUrlArray = webUrl.split('/');
+Requester.prototype._getPath = function (userInput) {
+  var userInputArray = userInput.split('/');
 
-  if ( webUrl.split('/')[1] ) {
-    return '/' + webUrlArray.slice(1, webUrlArray.length).join('/');
-  } else {
-    return '/';
+  if (userInput.split('/')[1]) {
+    return `/${userInputArray.slice(1, userInputArray.length).join('/')}`;
   }
+  return '/';
 };
 
 module.exports = Requester;
