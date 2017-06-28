@@ -6,12 +6,11 @@ function Renderer() {
 }
 
 Renderer.prototype.printContent = function (parsedHtml, fn) {
-  var el, nextEl, previousEl
+  var el, nextEl, previousEl;
   for (var i = 0; i < parsedHtml.length; i++) {
-    el = parsedHtml[i]
-    nextEl = parsedHtml[i + 1]
-    previousEl = parsedHtml[i - 1]
-
+    el = parsedHtml[i];
+    nextEl = parsedHtml[i + 1];
+    previousEl = parsedHtml[i - 1];
     if (Array.isArray(el)) {
       this.printContent(el, fn);
     } else if (this._isHyperlinkTag(el)) {
