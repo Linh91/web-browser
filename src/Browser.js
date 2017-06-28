@@ -13,10 +13,10 @@ Browser.prototype.visitPage = function(webUrl, fn) {
       browser = new Browser();
       browser._redirect(source, fn);
     } else {
-    var parser = new Parser(source);
-    var renderer = new Renderer();
-    renderer.printContent(parser.parsedHtml(), fn);
-  }
+      var parser = new Parser();
+      var renderer = new Renderer();
+      renderer.printContent(parser.parseHtml(source), fn);
+    }
   });
 };
 
