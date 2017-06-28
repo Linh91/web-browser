@@ -8,14 +8,14 @@ describe('Renderer', function() {
     result = '';
   });
 
-  it('console logs all text not in tags', function() {
-    parsedHtml = ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'];
+  it('returns all text not in tags', function() {
+    parsedHtml = ['<body>', ['<p>', 'Hello world!', '</p>'], '</body>'];    
     renderer.printContent(parsedHtml, function(content) {
       expect(content).toEqual("Hello world!");
     });
   });
 
-  it('console logs all text from multidimensional arrays', function() {
+  it('returns all text from multidimensional arrays', function() {
     parsedHtml = [['<body>',
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
@@ -61,14 +61,13 @@ describe('Renderer', function() {
                  ['<p>', 'Hello world!', '</p>'],
                  ['<p>', 'We are building a web browser!', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'];
-
     renderer.printContent(parsedHtml, function(content) {
       result += content;
     });
     expect(result).toEqual('HeaderHello world!We are building a web browser!Platypus');
   });
 
-  it('converts special characters into real characters', function() {
+  it('converts special characters into unicode characters', function() {
     parsedHtml = ['<body>',
                  ['<p>', 'Hello world&#x21;', '</p>'],
                  [ '<p>', 'Platypus', '</p>' ], '</body>'],
@@ -79,10 +78,10 @@ describe('Renderer', function() {
   });
 
   it('associates link tags with content deeply nested inside them', function() {
-    parsedHtml = ['<a href="xyz">', ['<span>', 'some text', '</span>'], '</a>']
+    parsedHtml = ['<a href="xyz">', ['<span>', 'some text', '</span>'], '</a>'];
     renderer.printContent(parsedHtml, function(content, tag) {
-      result = content + tag
+      result = content + tag;
     });
-    expect(result).toEqual('some text<a href="xyz">')
+    expect(result).toEqual('some text<a href="xyz">');
   });
 });
