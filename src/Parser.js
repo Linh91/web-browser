@@ -17,16 +17,12 @@ Parser.prototype._chopPreBody = function () {
   }
 };
 
-// removes \n charachters, cleans tabs and returns the array of characters
 Parser.prototype._cleanHtml = function () {
   this.response = this.response.replace(/[\n\r]/g, '');
   this.response = this.response.split(/>[\s]*</g);
   this.response = this.response.join('><');
   return this.response.split('');
 };
-
-// Controls the parsing, recursive, and can handle multiple childs in a line with the
-// while loop, which is looping till finds a close tag for the line
 
 Parser.prototype._parse = function () {
   var parsedHtmlArray;
@@ -46,8 +42,6 @@ Parser.prototype._openTag = function () {
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
 
-//looking for a close tag, but if it finds an opentag, it starts a new line
-
 Parser.prototype._closeTag = function () {
   if (this._isOpenTag()) {
     return this._parse();
@@ -55,8 +49,6 @@ Parser.prototype._closeTag = function () {
   var endIndex = this.htmlCharacters.indexOf('>');
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
-
-//looking for content, but if it finds an opentag, it starts a new line
 
 Parser.prototype._innerContent = function () {
   if (this._isOpenTag()) {
