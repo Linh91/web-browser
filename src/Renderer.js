@@ -1,40 +1,55 @@
-function Renderer(){
-  this.openATag = false
+const HtmlEntities = require('./HtmlEntities.js');
+
+function Renderer() {
+  this.hyperlinkTag = false;
+  this.htmlEntities = new HtmlEntities();
 }
 
 Renderer.prototype.printContent = function (parsedHtml, fn) {
-  for ( var i = 0; i < parsedHtml.length; i++ ) {
-    if (Array.isArray(parsedHtml[i])) {
-      this.printContent(parsedHtml[i], fn);
-    } else if ( /<[^>]*a* href\s*?/igm.test(parsedHtml[i]) === true &&
-    (Array.isArray(parsedHtml[i + 1]))) {
-      this.openATag = parsedHtml[i]
-    } else if ( parsedHtml[i][0] !== '<' &&
-    /<[^>]*script\s*?/igm.test(parsedHtml[i - 1]) !== true &&
-    /<[^>]*script\s*?/igm.test(parsedHtml[i + 1]) !== true &&
-    /<[^>]*style\s*?/igm.test(parsedHtml[i - 1]) !== true ) {
-      if(this.openATag === false) {
-        fn(this.convertHtmlChars(parsedHtml[i]), parsedHtml[i-1]);
-      } else {
-        fn(this.convertHtmlChars(parsedHtml[i]), this.openATag);
-        this.openATag = false
-      }
+  var el, nextEl, previousEl;
+  for (var i = 0; i < parsedHtml.length; i++) {
+    el = parsedHtml[i];
+    nextEl = parsedHtml[i + 1];
+    previousEl = parsedHtml[i - 1];
+    if (Array.isArray(el)) {
+      this.printContent(el, fn);
+    } else if (this._isHyperlinkTag(el)) {
+      this.hyperlinkTag = el;
+    } else if (this._rendererReq(el, previousEl, nextEl)) {
+      this._render(el, previousEl, fn);
     }
   }
 };
 
-Renderer.prototype.convertHtmlChars = function (htmlText) {
-  return htmlText
-  .replace(/&#x21;/g, "!")
-  .replace(/&#x22;/g, "\"")
-  .replace(/&#x23;/g, "#")
-  .replace(/&#x24;/g, "$")
-  .replace(/&#x25;/g, "%")
-  .replace(/&#x26;/g, "&")
-  .replace(/&#x27;/g, "'")
-  .replace(/&#x28;/g, "(")
-  .replace(/&#x29;/g, ")")
-  .replace(/&copy;/g, "©")
-  .replace(/&amp;/g, "&")
+Renderer.prototype._render = function (htmlContent, htmlTag, fn) {
+  var content, tag;
+  content = this.htmlEntities.decoder(htmlContent);
+  tag = (this.hyperlinkTag) ? this.hyperlinkTag : htmlTag;
+    fn(content, tag);
+    this.hyperlinkTag = false;
 };
+
+Renderer.prototype._rendererReq = function (el, previousEl, nextEl) {
+  return this._isNotTag(el[0]) &&
+         this._isNotScriptTag(previousEl) &&
+         this._isNotScriptTag(nextEl) &&
+         this._isNotStyleTag(previousEl);
+};
+
+Renderer.prototype._isNotScriptTag = function (text) {
+  return !(/<[^>]*script\s*?/igm).test(text);
+};
+
+Renderer.prototype._isNotStyleTag = function (text) {
+  return !(/<[^>]*style\s*?/igm).test(text);
+};
+
+Renderer.prototype._isHyperlinkTag = function (text) {
+  return (/<[^>]*a* href\s*?/igm).test(text);
+};
+
+Renderer.prototype._isNotTag = function (text) {
+  return text !== '<';
+};
+
 module.exports = Renderer;
