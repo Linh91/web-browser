@@ -1,20 +1,15 @@
 function HtmlEntities() {
-
+  this.htmlAndUnicode = {'&#x21;' : '!', '&#x22;': '\"', '&#x23;': '#', '&#x24;': '$',
+                         '&#x26;': '&','&#x27;': "'",'&#x28;': '(','&#x29;': ')',
+                         '&copy;': '©','&amp;': '&'}
 };
 
 HtmlEntities.prototype.decoder = function (htmlText) {
-  return htmlText
-  .replace(/&#x21;/g, "!")
-  .replace(/&#x22;/g, "\"")
-  .replace(/&#x23;/g, "#")
-  .replace(/&#x24;/g, "$")
-  .replace(/&#x25;/g, "%")
-  .replace(/&#x26;/g, "&")
-  .replace(/&#x27;/g, "'")
-  .replace(/&#x28;/g, "(")
-  .replace(/&#x29;/g, ")")
-  .replace(/&copy;/g, "©")
-  .replace(/&amp;/g, "&")
+  for (var i = 0; i < Object.keys(this.htmlAndUnicode).length; i++) {
+    var nextHtmlCodeToCheck = new RegExp(Object.keys(this.htmlAndUnicode)[i], 'g');
+    htmlText = htmlText.replace(nextHtmlCodeToCheck, Object.values(this.htmlAndUnicode)[i]);
+  };
+  return htmlText;
 };
 
 module.exports = HtmlEntities;
