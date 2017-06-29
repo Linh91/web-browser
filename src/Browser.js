@@ -13,9 +13,9 @@ Browser.prototype.visitPage = function(userInput, fn) {
       browser = new Browser();
       browser._redirect(response, fn);
     } else {
-      var parser = new Parser(response);
+      var parser = new Parser();
       var renderer = new Renderer();
-      renderer.printContent(parser.parsedHtml(), fn);
+      renderer.printContent(parser.parseHtml(response), fn);
     }
   });
 };
