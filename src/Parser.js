@@ -70,7 +70,7 @@ Parser.prototype._isOpenTag = function () {
   htmlString = htmlString.join('>\n');
   currentElement = htmlString.split('\n')[0];
 
-  return (/<\s*?\w*\s*?>/igm).test(currentElement);
+  return (/^<[a-z].*>/i).test(currentElement);
 };
 
 module.exports = Parser;
