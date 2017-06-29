@@ -45,7 +45,7 @@ var display = blessed.box({
   tags: true,
   mouse: true,
   key: true,
-  content: '{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
+  content: '{bold}' + '\n' + '\n' + graphic.pic + '{/bold}' + '{bold}' + '\n' + graphic.title + '{/bold}',
   style: {
     fg: 'black',
   },
