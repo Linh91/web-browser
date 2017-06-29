@@ -13,52 +13,39 @@ var screen = blessed.screen({
 
 screen.title = 'Platypus';
 
-var title = blessed.box({
-  content: 'Made by Filipe, Will, Sammy & Peter.',
-  left: '0%',
-  width: '100%',
-  height: '10%',
-  // content: '{bold}' + '\n' + graphic.title + '{/bold}',
-  tags: true,
-  style: {
-    fg: 'white',
-    bg: '#68707c',
-  }
-});
-
 var display = blessed.box({
-  top: '10%',
-  height: '85%',
-  width: '80%',
+  top: '6%',
+  height: '94%',
+  width: '82%',
   scrollable: true,
   tags: true,
   mouse: true,
   key: true,
   content: '{bold}' + '\n' + graphic.title + '{/bold}'+'{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
+  border: {
+    type: 'line',
+  },
   style: {
     fg: 'black',
-  },
-  border: {
-    type: 'line'
-  },
+  }
 });
 
 var linksBox = blessed.box({
   content: 'Links:',
-  top: '10%',
-  height: '85%',
-  width: '20%',
-  left: '80%',
+  top: '6%',
+  height: '94%',
+  width: '19%',
+  left: '83%',
   scrollable: true,
   tags: true,
   mouse: true,
   key: true,
+  border: {
+    type: 'line',
+  },
   style: {
     fg: 'black',
-  },
-  border: {
-    type: 'line'
-  },
+  }
 });
 
 var addressBar = blessed.textbox({
@@ -67,27 +54,13 @@ var addressBar = blessed.textbox({
   inputOnFocus: true,
   mouse: true,
   key: true,
-  top: '94%',
-  height: '8%',
-  width: '80%',
-  style: {
-    fg: 'white',
-    bg: 'grey'
+  height: '6%',
+  border: {
+    type: 'line',
   },
-});
-
-var smallBar = blessed.textbox({
-  content: 'Platypus',
-  tags: true,
-  key: true,
-  top: '94%',
-  height: '8%',
-  width: '19%',
-  left: '81%',
   style: {
-    fg: 'white',
-    bg: 'grey'
-  },
+    fg: 'black',
+  }
 });
 
 addressBar.on('submit', (text) => {
@@ -155,8 +128,6 @@ var pushLinkToArray = function(tag, url) {
   };
 };
 
-screen.append(title);
-screen.append(smallBar);
 screen.append(linksBox);
 screen.append(display);
 screen.append(addressBar);
