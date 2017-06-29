@@ -13,62 +13,39 @@ var screen = blessed.screen({
 
 screen.title = 'Platypus';
 
-var title = blessed.box({
-  left: '0%',
-  width: '55%',
-  height: '18%',
-  content: '{bold}' + '\n' + graphic.title + '{/bold}',
-  tags: true,
-  style: {
-    fg: 'white',
-    bg: '#4286f4',
-  }
-});
-
-var pic = blessed.box({
-  left: '50%',
-  width: '55%',
-  height: '18%',
-  content: '{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
-  tags: true,
-  style: {
-    fg: 'white',
-    bg: '#4286f4',
-  }
-});
-
 var display = blessed.box({
-  top: '18%',
-  height: '76%',
-  width: '80%',
+  top: '7%',
+  height: '94%',
+  width: '82%',
   scrollable: true,
   tags: true,
   mouse: true,
   key: true,
+  content: '{bold}' + '\n' + graphic.title + '{/bold}'+'{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
+  border: {
+    type: 'line',
+  },
   style: {
     fg: 'black',
-  },
-  border: {
-    type: 'line'
-  },
+  }
 });
 
 var linksBox = blessed.box({
   content: 'Links:',
-  top: '18%',
-  height: '76%',
-  width: '20%',
-  left: '80%',
+  top: '7%',
+  height: '94%',
+  width: '18%',
+  left: '82%',
   scrollable: true,
   tags: true,
   mouse: true,
   key: true,
+  border: {
+    type: 'line',
+  },
   style: {
     fg: 'black',
-  },
-  border: {
-    type: 'line'
-  },
+  }
 });
 
 var addressBar = blessed.textbox({
@@ -77,15 +54,14 @@ var addressBar = blessed.textbox({
   inputOnFocus: true,
   mouse: true,
   key: true,
-  top: '94%',
-  height: '8%',
-  width: '70%',
-  style: {
-    fg: 'white',
-    bg: 'red'
+  height: '7%',
+  border: {
+    type: 'line',
   },
+  style: {
+    fg: 'black',
+  }
 });
-
 
 addressBar.on('submit', (text) => {
   if(Number.isInteger(parseInt(text[0]))) {
@@ -152,8 +128,6 @@ var pushLinkToArray = function(tag, url) {
   };
 };
 
-screen.append(title);
-screen.append(pic);
 screen.append(linksBox);
 screen.append(display);
 screen.append(addressBar);
