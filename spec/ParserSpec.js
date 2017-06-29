@@ -42,14 +42,14 @@ describe('Parser', function() {
   it('recognizes tags nested in content', function() {
     response = "<html><body><p>Hello <a href='bla'>world</a>!</p></body></html>";
     parser = new Parser();
-    result = ['<body>', ['<p>', 'Hello', ["<a href='bla'>", 'world', '</a>'], '!', '</p>'], '</body>'];
+    result = ['<body>', ['<p>', 'Hello ', ["<a href='bla'>", 'world', '</a>'], '!', '</p>'], '</body>'];
     expect(parser.parseHtml(response)).toEqual(result);
   });
 
   it('recognizes first element as content', function() {
-    response = 'covfefe<a href="hello world">hello</a>hehehe';
+    response = 'covfefe<a href="lala">hello</a><p>hehehe</p>';
     parser = new Parser();
-    result = ['', 'covfefe', ['<a href="hello world">', 'world', '</a>'], 'hehehe'];
+    result = ['covfefe', ['<a href="lala">', 'hello', '</a>'], ['<p>', 'hehehe', '</p>'], ''];
     expect(parser.parseHtml(response)).toEqual(result);
   });
 

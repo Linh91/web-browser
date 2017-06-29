@@ -1,5 +1,4 @@
-function HtmlEntities() { 
-}
+function HtmlEntities() {}
 
 HtmlEntities.prototype.decoder = function (htmlText) {
   var nextHtmlCodeToCheck;

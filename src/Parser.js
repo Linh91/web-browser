@@ -37,17 +37,11 @@ Parser.prototype._parse = function () {
 };
 
 Parser.prototype._openTag = function () {
-  var endIndex = this.htmlCharacters.indexOf('>');
+  if (!this._isOpenTag()) {
 
-  return this.htmlCharacters.splice(0, endIndex + 1).join('');
-};
-
-Parser.prototype._closeTag = function () {
-  var endIndex = this.htmlCharacters.indexOf('>');
-  if (this._isOpenTag()) {
-
-    return this._parse();
+    return this._innerContent();
   }
+  var endIndex = this.htmlCharacters.indexOf('>');
 
   return this.htmlCharacters.splice(0, endIndex + 1).join('');
 };
@@ -62,6 +56,19 @@ Parser.prototype._innerContent = function () {
   return this.htmlCharacters.splice(0, endIndex).join('');
 };
 
+Parser.prototype._closeTag = function () {
+  var endIndex = this.htmlCharacters.indexOf('>');
+  if (this._isOpenTag()) {
+
+    return this._parse();
+  } else if (!this._isOpenTag() && !this._isCloseTag()) {
+
+    return this._innerContent();
+  }
+
+  return this.htmlCharacters.splice(0, endIndex + 1).join('');
+};
+
 Parser.prototype._isOpenTag = function () {
   var currentElement, htmlString;
 
@@ -71,6 +78,17 @@ Parser.prototype._isOpenTag = function () {
   currentElement = htmlString.split('\n')[0];
 
   return (/^<[a-z].*>/i).test(currentElement);
+};
+
+Parser.prototype._isCloseTag = function () {
+  var currentElement, htmlString;
+
+  htmlString = this.htmlCharacters.join('');
+  htmlString = htmlString.split('>');
+  htmlString = htmlString.join('>\n');
+  currentElement = htmlString.split('\n')[0];
+
+  return (/^<\s*\/\s*[a-z].*>/i).test(currentElement);
 };
 
 module.exports = Parser;
