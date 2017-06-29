@@ -27,8 +27,8 @@ var title = blessed.box({
 });
 
 var display = blessed.box({
-  top: '18%',
-  height: '76%',
+  top: '10%',
+  height: '85%',
   width: '80%',
   scrollable: true,
   tags: true,
@@ -45,8 +45,8 @@ var display = blessed.box({
 
 var linksBox = blessed.box({
   content: 'Links:',
-  top: '18%',
-  height: '76%',
+  top: '10%',
+  height: '85%',
   width: '20%',
   left: '80%',
   scrollable: true,
