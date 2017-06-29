@@ -1,9 +1,29 @@
 const Graphic = function() {
 
-this.pic =  "                         _.-^~~^^^`~-,_,,~''''''```~,''``~'``~, \n\
-                 ______,'  -o  :.  _    .          ;     ,'`,  `. \n\
-                (      -\.._,.;;'._ ,(   }        _`_-_,,    `, `, \n\
-                 ``~~~~~~'   ((/'((((____/~~~~~~'(,(,___>      `~'";
+this.pic =  " \n\
+                           `..--:::::---.`       \n\
+                      .:+osyyysssssoooossssyyyso+:.                              \n\
+                   `:oysssooooooooooooooooooooooosssyo:`                          \n\
+                  `+ysooso+oosooooooooooooooooossooosoosy+`                        \n\
+                 /ysoos/`` ``./soo+++++oooooos/.````./yoosy/                       \n\
+               oyoooy.        .y+++++oo++++y.        .yoooyo                      \n\
+      ``/yyo.`+soossy    s:    s++++sys++++s    -s    ssoooys+/.++----  \n\
+      ..omydyyyoooyyy-`  `    .yooyyssssysoy-    `  `.yyyooodhmhhdy---            \n\
+      /dhyhyhdmoss/::+/-`` `-:+:syoooooooys:+/-```.-:+::/osoymhyyyhd-.            \n\
+    ./ydyyyyydhso--:++oo+///::--doooooooood--::///+oo++:--osymyyyhym+-            \n\
+    -mhhhyyymdoy--+mMMMNmho/---/doooooooooh/---/ohmNMMMm+--yommyyhhhhd`           \n\
+    `::yyyyyhyos--mMMMMMMMMNmhshssooooooooshshmNMMMMMMMMm--sodhhhhs++/            \n\
+            `dos--sMMMMMMMMMMNhssssssssssssshNMMMMMMMMMMs--ood.````               \n\
+             dos---+mMMMMMMMMMNNmmmmmmmmmmmNNMMMMMMMMMm+---ssm                    \n\
+  ``.`      hsy:----+ymNMMMMMMMMNdyhmhyhNMMMMMMMMNmy+----:yyd                    \n\
+`+yhhyyo:.` oysy:------/+shmmNNNy+/////:oNNNmmhs+/------:ssys                    \n\
++dhdddhddhyssdyss+-----------://///////////:-----------+yssd.                    \n\
+ydhddhdddhhdhmhsssso+::::/+++ooooooooooooooo++//::::/osysshd`                    \n\
++mhdhhddhdhdmddhyssssysssooosssssssssssssssssoo+ossyssssyhdd:                    \n\
+ odddddddddhhdhhdyysssssys+/:---------------:/+oyyssssyyddho                     \n\
+  .:+ooo++/:-ohhhhmdyyhs:::::::-------------:::::ohyyhhhhhh+`                    \n\
+            `oyhhhhy-+ysooo++++///////++++++ooooo+yo+dhhhhyo.                    \n\
+                ``   `   `..-:::::::/:::::::--.`    ` ````      ";
 
 this.title =   "                   _____    _           _                                 \n\
                   |  __ \\  | |         | |                                \n\

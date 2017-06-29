@@ -14,26 +14,15 @@ var screen = blessed.screen({
 screen.title = 'Platypus';
 
 var title = blessed.box({
+  content: 'Platypus',
   left: '0%',
-  width: '55%',
-  height: '5%',
+  width: '100%',
+  height: '10%',
   // content: '{bold}' + '\n' + graphic.title + '{/bold}',
   tags: true,
   style: {
     fg: 'white',
-    bg: '#4286f4',
-  }
-});
-
-var pic = blessed.box({
-  left: '50%',
-  width: '55%',
-  height: '5%',
-  // content: '{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
-  tags: true,
-  style: {
-    fg: 'white',
-    bg: '#4286f4',
+    bg: '#68707c',
   }
 });
 
@@ -154,7 +143,7 @@ var pushLinkToArray = function(tag, url) {
 };
 
 screen.append(title);
-screen.append(pic);
+// screen.append(pic);
 screen.append(linksBox);
 screen.append(display);
 screen.append(addressBar);
