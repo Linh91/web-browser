@@ -14,7 +14,7 @@ var screen = blessed.screen({
 screen.title = 'Platypus';
 
 var display = blessed.box({
-  top: '6%',
+  top: '7%',
   height: '94%',
   width: '82%',
   scrollable: true,
@@ -32,10 +32,10 @@ var display = blessed.box({
 
 var linksBox = blessed.box({
   content: 'Links:',
-  top: '6%',
+  top: '7%',
   height: '94%',
-  width: '19%',
-  left: '83%',
+  width: '18%',
+  left: '82%',
   scrollable: true,
   tags: true,
   mouse: true,
@@ -54,7 +54,7 @@ var addressBar = blessed.textbox({
   inputOnFocus: true,
   mouse: true,
   key: true,
-  height: '6%',
+  height: '7%',
   border: {
     type: 'line',
   },
