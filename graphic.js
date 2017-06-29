@@ -2,7 +2,7 @@ const Graphic = function() {
 
   this.title =   "  \n\
                     ooooooooo.   oooo                .     \n\
-                    `888   `Y88. `888              .o8      \n\
+                   `888   `Y88. `888              .o8      \n\
                     888   .d88'  888   .oooo.   .o888oo oooo    ooo oo.ooooo.  oooo  oooo   .oooo.o\n\
                     888ooo88P'   888  `P  )88b    888    `88.  .8'   888' `88b `888  `888  d88(   '8\n\
                     888          888   .oP'888    888     `88..8'    888   888  888   888  `'Y88b. \n\

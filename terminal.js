@@ -14,7 +14,7 @@ var screen = blessed.screen({
 screen.title = 'Platypus';
 
 var title = blessed.box({
-  content: 'Platypus',
+  content: 'Made by Filipe, Will, Sammy & Peter.',
   left: '0%',
   width: '100%',
   height: '10%',
@@ -76,6 +76,19 @@ var addressBar = blessed.textbox({
   },
 });
 
+var smallBar = blessed.textbox({
+  content: 'Platypus',
+  tags: true,
+  key: true,
+  top: '94%',
+  height: '8%',
+  width: '19%',
+  left: '81%',
+  style: {
+    fg: 'white',
+    bg: 'grey'
+  },
+});
 
 addressBar.on('submit', (text) => {
   if(Number.isInteger(parseInt(text[0]))) {
@@ -143,7 +156,7 @@ var pushLinkToArray = function(tag, url) {
 };
 
 screen.append(title);
-// screen.append(pic);
+screen.append(smallBar);
 screen.append(linksBox);
 screen.append(display);
 screen.append(addressBar);
