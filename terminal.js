@@ -45,6 +45,7 @@ var display = blessed.box({
   tags: true,
   mouse: true,
   key: true,
+  content: '{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
   style: {
     fg: 'black',
   },
@@ -82,7 +83,7 @@ var addressBar = blessed.textbox({
   width: '70%',
   style: {
     fg: 'white',
-    bg: 'red'
+    bg: 'grey'
   },
 });
 
