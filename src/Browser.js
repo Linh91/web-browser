@@ -6,12 +6,27 @@ function Browser() {
   this.requester = new Requester();
 }
 
-Browser.prototype.visitPage = function(webUrl, fn) {
-   this.requester.fetcher(webUrl, function(source) {
-    var parser = new Parser();
-    var renderer = new Renderer();
-    renderer.printContent(parser.parseHtml(source), fn);
+Browser.prototype.visitPage = function(userInput, fn) {
+   this.requester.getRequest(userInput, function(response) {
+    if (response.includes('The document has moved')) {
+      var browser;
+      browser = new Browser();
+      browser._redirect(response, fn);
+    } else {
+      var parser = new Parser();
+      var renderer = new Renderer();
+      renderer.printContent(parser.parseHtml(response), fn);
+    }
   });
+};
+
+Browser.prototype._redirect = function(response, fn) {
+  var urlStart, urlEnd, redirectedUrl;
+  urlStart = response.indexOf('://') + 3;
+  urlEnd = response.indexOf('">', urlStart);
+  redirectedUrl = response.slice(urlStart, urlEnd);
+  
+  return this.visitPage(redirectedUrl, fn);
 };
 
 module.exports = Browser;
