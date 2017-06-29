@@ -98,11 +98,10 @@ var callBack = function(content, tag) {
     pushLinkToArray(tag, url);
     linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
     display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
-    screen.render();
     linkCounter += 1;
+    screen.render();
   } else if (/<\s*h([1-6].*?)>/igm.test(tag)) {
     display.pushLine('{bold}' + content + '{/bold}')
-    screen.render();
   } else {
     display.pushLine(content);
     screen.render();
@@ -114,7 +113,8 @@ var pushLinkToArray = function(tag, url) {
   tag = tag.slice(startTag, tag.length)
   var endTag = tag.indexOf('"', tag.indexOf('"') + 1 )
   tag = tag.slice(0, endTag + 2)
-  var startHtml = "<a "
+  var starHtml = "<a "
+  tag = starHtml + tag
   if (tag.includes('http')) {
     links.push(tag);
   } else {
@@ -123,7 +123,6 @@ var pushLinkToArray = function(tag, url) {
       var baseUrl = url.indexOf('/')
       url = url.slice(0, baseUrl)
     }
-    tag = startHtml + tag
     links.push(url + tag.slice(openTagIndex, tag.length))
   };
 };
