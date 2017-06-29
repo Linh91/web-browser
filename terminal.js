@@ -16,8 +16,8 @@ screen.title = 'Platypus';
 var title = blessed.box({
   left: '0%',
   width: '55%',
-  height: '18%',
-  content: '{bold}' + '\n' + graphic.title + '{/bold}',
+  height: '5%',
+  // content: '{bold}' + '\n' + graphic.title + '{/bold}',
   tags: true,
   style: {
     fg: 'white',
@@ -28,8 +28,8 @@ var title = blessed.box({
 var pic = blessed.box({
   left: '50%',
   width: '55%',
-  height: '18%',
-  content: '{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
+  height: '5%',
+  // content: '{bold}' + '\n' + '\n' + graphic.pic + '{/bold}',
   tags: true,
   style: {
     fg: 'white',
