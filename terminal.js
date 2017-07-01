@@ -8,7 +8,7 @@ var links, linkCounter, url;
 
 
 var screen = blessed.screen({
-  smartCSR: true
+  smartCSR: true,
 });
 
 screen.title = 'Platypus';
@@ -27,6 +27,7 @@ var display = blessed.box({
   },
   style: {
     fg: 'black',
+    bg: '#efefef'
   }
 });
 
@@ -45,6 +46,7 @@ var linksBox = blessed.box({
   },
   style: {
     fg: 'black',
+    bg: '#efefef',
   }
 });
 
@@ -60,6 +62,7 @@ var addressBar = blessed.textbox({
   },
   style: {
     fg: 'black',
+    bg: '#efefef'
   }
 });
 
