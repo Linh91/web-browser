@@ -75,5 +75,12 @@ All that remained at the end was to spruce up our layout, and add a prettier Asc
 
 ![screenshot 2017-07-01 at 12 38 50](https://user-images.githubusercontent.com/20523607/27761752-45f4559c-5e5a-11e7-83df-675225bfe5c5.png)
 
+Ta-da!
 
-Ta da!
+Known bugs
+--------
+
+* In a small number of cases, HTML is rendered as content
+* No support for dynamic content (not a bug exactly, but we thought we should mention it!)
+* For some links with very complex structures, the browser is unable to locate the corresponding URL for the links list
+* Our system for recognising can also be defeated by some unconventional ways of writing them (e.g. tags written with an upper-case 'a')
