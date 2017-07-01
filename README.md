@@ -4,7 +4,8 @@ Platypus Web Browser
 
 Makers Academy final project to build an original web browser with Node.js in two weeks, by Filipe Fasolin, Ngoc Linh Sammy Ha, Peter Barcsak, and Will Gant.
 
-<img src='https://github.com/ffasolin/web-browser/blob/readme/platypus-demo.gif?raw=true' height='500px' width='800px'>
+<img src='https://user-images.githubusercontent.com/25456821/27765521-49bd3a08-5eab-11e7-886c-1ebcab4aa8e1.gif' height='500px' width='800px'>
+
 
 Installation & Testing
 --------
@@ -73,7 +74,7 @@ All that remained at the end was to spruce up our layout, and add a prettier Asc
 
 ![screenshot 2017-07-01 at 09 28 15](https://user-images.githubusercontent.com/20523607/27761720-8d476e80-5e59-11e7-9430-39334187968e.png)
 
-![screenshot 2017-07-01 at 12 38 50](https://user-images.githubusercontent.com/20523607/27761752-45f4559c-5e5a-11e7-83df-675225bfe5c5.png)
+![screen shot 2017-07-01 at 22 23 51](https://user-images.githubusercontent.com/25456821/27765543-0a9a03e6-5eac-11e7-8397-4cd5ef92fe58.png)
 
 Ta-da!
 
@@ -83,4 +84,3 @@ Known bugs
 * In a small number of cases, HTML is rendered as content
 * No support for dynamic content (not a bug exactly, but we thought we should mention it!)
 * For some links with very complex structures, the browser is unable to associate the text with the URL for the links list
-* Our system for recognising links can also be defeated by some unconventional ways of writing them (e.g. tags written with an upper-case 'a')
