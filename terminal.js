@@ -8,7 +8,7 @@ var links, linkCounter, url;
 
 
 var screen = blessed.screen({
-  smartCSR: true,
+  smartCSR: true
 });
 
 screen.title = 'Platypus';
