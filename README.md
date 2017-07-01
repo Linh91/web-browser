@@ -49,9 +49,9 @@ First and foremost, we wanted a challenge. We wanted to learn as much as we coul
 After reading up on the core components of a browser, our first hurdle was decide *what* we would actually build. We found no shortage of Stack Overflow posts advising against build your own HTML parser, for instance. The complexity was too great, and anyway, the posts advised sagely, parsing HTML is a "solved problem". Why would you attempt to write your own when wise men and women have already spent thousands of hours developing software that already does the job flawlessly? A similar logic applied to rendering engines, and almost every other part our browser would need.
 
 > *If you want to write the next "Greaterest HTML parserer" then give it up. Apache (or somebody else) wins; the important information is: you don't know more than the large groups that specialize in parsing HTML.*
-> (Stack Overflow comment)
+>> <cite>Stack Overflow comment</cite>
 
-We pondered this for a while, and in the end agreed that we wanted to make everything ourselves. We would all get much more out of the experience, and the final product would be all the more impressive for our struggles.
+We pondered this for a while, and in the end agreed that, nonetheless, we wanted to make everything ourselves. We would all learn much more from the experience, and the final product would be all the more impressive for our struggles.
 
 We began by building a basic parser, to take a string of HTML and break it into chunks we would be able to use later to render a page, and after some discussion we decided that those chunks should be organised in arrays of arrays - one for each element. The very first thing we did was to write a test for our parser taking `'<p>Hello world!</p>'` and returning `['<p>', 'Hello world!', '</p>']`. We passed the test by using JavaScript string functions to isolate the angle brackets surrounding each tag, and then cut at the appropriate index and pushed to the array.
 
@@ -68,3 +68,12 @@ Wow! What a great feeling. We really had a web browser now. It might have been c
 Up until this stage, we had worked on everything as a group of four, as we thought it was vital that everyone have a full understanding of the core architecture of what we were building. After this, we split into pairs and began checking out tasks from a Trello board. The next period was one of incremental improvements, particularly to the parser and renderer, which needed to get better at differentiating between content that the user should see, and HTML tags, scripts, and other material that should stay behind the scenes.
 
 Progress started to really accelerate, and we soon set our sights on improving the user interface to make it look more like familiar, modern web browsers and (slightly) less retro. We gave a lot of thought as to whether, at this stage, to try to build a standalone application and a new renderer capable of placing elements at particular coordinates, but in the end we felt it was better to prioritise adding more basic browser functionality, in particular links. After building an attractive console interface with Blessed - the sole external library used in our project - we set to work on links. We first explored the possibility of making these clickable, but in the end settled on a solution that rendered a box of numbered links for every page, allowing users to type a number in the address bar to visit the corresponding URL. Later improvements included the styling of headers and the ability to redirect following 3xx HTTP responses.
+
+All that remained at the end was to spruce up our layout and colour scheme, and add a prettier Ascii logo to our welcome page.
+
+![screenshot 2017-07-01 at 09 28 15](https://user-images.githubusercontent.com/20523607/27761720-8d476e80-5e59-11e7-9430-39334187968e.png)
+
+![screenshot 2017-07-01 at 12 38 50](https://user-images.githubusercontent.com/20523607/27761752-45f4559c-5e5a-11e7-83df-675225bfe5c5.png)
+
+
+Ta da!
