@@ -4,7 +4,7 @@ Platypus Web Browser
 
 Makers Academy final project to build an original web browser with Node.js in two weeks, by Filipe Fasolin, Ngoc Linh Sammy Ha, Peter Barcsak, and Will Gant.
 
-<img src='https://github.com/ffasolin/web-browser/blob/readme/platypus-demo.gif?raw=true' height='600px' width='900px'>
+<img src='https://github.com/ffasolin/web-browser/blob/readme/platypus-demo.gif?raw=true' height='500px' width='800px'>
 
 Installation & Testing
 --------
