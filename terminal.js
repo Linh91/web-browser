@@ -90,13 +90,13 @@ var clearData = function() {
   display.setContent('');
   linksBox.setContent('Links:');
   links = [];
-  linkCounter = 0
+  linkCounter = 1
 }
 
 var callBack = function(content, tag) {
   if (/<[^>]*a* href\s*?/igm.test(tag)) {
     pushLinkToArray(tag, url);
-    linksBox.pushLine((linkCounter + 1 + '. ') + `{blue-fg}{underline}${content}{/}`);
+    linksBox.pushLine((linkCounter + '. ') + `{blue-fg}{underline}${content}{/}`);
     display.pushLine(`{blue-fg}{underline}${content}{/} (${linkCounter})`);
     linkCounter += 1;
     screen.render();
