@@ -27,7 +27,7 @@ var display = blessed.box({
   },
   style: {
     fg: 'black',
-    bg: '#c9f6fe'
+    bg: '#efefef'
   }
 });
 
@@ -46,7 +46,7 @@ var linksBox = blessed.box({
   },
   style: {
     fg: 'black',
-    bg: '#c9f6fe',
+    bg: '#efefef',
   }
 });
 
@@ -62,7 +62,7 @@ var addressBar = blessed.textbox({
   },
   style: {
     fg: 'black',
-    bg: '#c9f6fe'
+    bg: '#efefef'
   }
 });
 
