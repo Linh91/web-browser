@@ -69,7 +69,7 @@ Up until this stage, we had worked on everything as a group of four, as we thoug
 
 Progress started to really accelerate, and we soon set our sights on improving the user interface to make it look more like familiar, modern web browsers and (slightly) less retro. We gave a lot of thought as to whether, at this stage, to try to build a standalone application and a new renderer capable of placing elements at particular coordinates, but in the end we felt it was better to prioritise adding more basic browser functionality, in particular links. After building an attractive console interface with Blessed - the sole external library used in our project - we set to work on links. We first explored the possibility of making these clickable, but in the end settled on a solution that rendered a box of numbered links for every page, allowing users to type a number in the address bar to visit the corresponding URL. Later improvements included the styling of headers and the ability to redirect following 3xx HTTP responses.
 
-All that remained at the end was to spruce up our layout and colour scheme, and add a prettier Ascii logo to our welcome page.
+All that remained at the end was to spruce up our layout, and add a prettier Ascii logo to our welcome page.
 
 ![screenshot 2017-07-01 at 09 28 15](https://user-images.githubusercontent.com/20523607/27761720-8d476e80-5e59-11e7-9430-39334187968e.png)
 
