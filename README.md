@@ -55,7 +55,7 @@ We pondered this for a while, and in the end agreed that, nonetheless, we wanted
 
 We began by building a basic parser, to take a string of HTML and break it into chunks we would be able to use later to render a page, and after some discussion we decided that those chunks should be organised in arrays of arrays - one for each element. The very first thing we did was to write a test for our parser taking `'<p>Hello world!</p>'` and returning `['<p>', 'Hello world!', '</p>']`. We passed the test by using JavaScript string functions to isolate the angle brackets surrounding each tag, and then cut at the appropriate index and push to the array.
 
-  Unfortunately, most websites have more complex structures than this, and our next priority was to find a way to deal with nested tags. We hit on recursion as a solution, with our parse function re-running itself whenever it encountered a new tag. After a short while, we ended up with something that could parse more complicated HTML, including asymmetrical structures such as those which had multiple sets of tags on a particular layer.
+Unfortunately, most websites have more complex structures than this, and our next priority was to find a way to deal with nested tags. We hit on recursion as a solution, with our parse function re-running itself whenever it encountered a new tag. After a short while, we ended up with something that could parse more complicated HTML, including asymmetrical structures such as those which had multiple sets of tags on a particular layer.
 
 At this point, we could have continued to make the parser more and more sophisticated, but we made a strategic decision to move on and instead aim to build a string of basic components that, together, would be capable of rendering our simple [test website](http://web-browser-test.herokuapp.com/) in the console. Next came the renderer, for which we again used recursion - this time to cycle through the arrays until we found content lying between tags, at which point we logged it to the console.
 
@@ -82,5 +82,5 @@ Known bugs
 
 * In a small number of cases, HTML is rendered as content
 * No support for dynamic content (not a bug exactly, but we thought we should mention it!)
-* For some links with very complex structures, the browser is unable to locate the corresponding URL for the links list
-* Our system for recognising can also be defeated by some unconventional ways of writing them (e.g. tags written with an upper-case 'a')
+* For some links with very complex structures, the browser is unable to associate the text with the URL for the links list
+* Our system for recognising links can also be defeated by some unconventional ways of writing them (e.g. tags written with an upper-case 'a')
