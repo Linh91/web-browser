@@ -4,7 +4,7 @@ Platypus Web Browser
 
 Makers Academy final project to build an original web browser with Node.js in two weeks, by Filipe Fasolin, Ngoc Linh Sammy Ha, Peter Barcsak, and Will Gant.
 
-XXXXXXXXXXXXXXXXXXXXXXXXXX animated GIF demonstration XXXXXXXXXXXXXXXXXXXXXXXXX
+![Platypus demo](https://media.giphy.com/media/l4FGCv3TyOLaM9p5K/giphy.gif)
 
 Installation & Testing
 --------
@@ -42,7 +42,7 @@ Technologies & Principles
 How we did it
 --------
 
-How did we end up choosing so complicated, when so many other browsers already exist?
+How did we end up choosing something so complicated, when so many other browsers already exist?
 
 First and foremost, we wanted a challenge. We wanted to learn as much as we could by really stretching our technical abilities, and at the same time we thought it was a great excuse to get better acquainted with how the web really works. We had all built websites and apps before, but we had only a hazy idea of how browsers actually present these to the user.
 
@@ -63,7 +63,7 @@ After this, we built an object to make HTTP get requests. Scenting our first maj
 
 ![19621815_10214130448362194_824571723_n](https://user-images.githubusercontent.com/20523607/27761462-09363e64-5e54-11e7-9da5-ea11f73d8492.png)
 
-Wow! What a great feeling. We really had a web browser now. It might have been capable of visiting 0.0000001% of websites on the net, but the entire process was now running from start to finish. 
+Wow! What a great feeling. We really had a web browser now. It might have been capable of visiting 0.0000001% of websites on the net, but the entire process was now running from start to finish.
 
 Up until this stage, we had worked on everything as a group of four, as we thought it was vital that everyone have a full understanding of the core architecture of what we were building. After this, we split into pairs and began checking out tasks from a Trello board. The next period was one of incremental improvements, particularly to the parser and renderer, which needed to get better at differentiating between content that the user should see, and HTML tags, scripts, and other material that should stay behind the scenes.
 
