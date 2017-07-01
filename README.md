@@ -83,4 +83,3 @@ Known bugs
 * In a small number of cases, HTML is rendered as content
 * No support for dynamic content (not a bug exactly, but we thought we should mention it!)
 * For some links with very complex structures, the browser is unable to associate the text with the URL for the links list
-* Our system for recognising links can also be defeated by some unconventional ways of writing them (e.g. tags written with an upper-case 'a')
