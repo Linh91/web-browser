@@ -56,4 +56,12 @@ We began by building a basic parser, to take a string of HTML and break it into 
 
 Unfortunately, most websites have more complex structures than this, and our next priority was to find a way to deal with nested tags. We hit on recursion as a solution, with our parse function re-running itself whenever it encountered a new tag. After a short while, we ended up with something that could parse more complicated HTML, including asymmetrical structures such as where there were multiple sets of tags on a particular layer.
 
-At this point, we could have continued to make the parser more and more sophisticated, but we made a strategic decision to move on - to aim to build a string of basic components that, together, would be capable of rendering our simple [test website](http://web-browser-test.herokuapp.com/). Next came the renderer, for which we again used recursion - this time to cycle through the arrays until we found content lying between tags, at which point we logged it to the console.
+At this point, we could have continued to make the parser more and more sophisticated, but we made a strategic decision to move on and instead aim to build a string of basic components that, together, would be capable of rendering our simple [test website](http://web-browser-test.herokuapp.com/) in the console. Next came the renderer, for which we again used recursion - this time to cycle through the arrays until we found content lying between tags, at which point we logged it to the console.
+
+After this, we built an object to make HTTP get requests. Scenting our first major victory, we raced ahead, mocking up a command line interface with a cool logo, and bringing all our components together to enable us to do this:
+
+![19621815_10214130448362194_824571723_n](https://user-images.githubusercontent.com/20523607/27761462-09363e64-5e54-11e7-9da5-ea11f73d8492.png)
+
+Wow! What a great feeling. We really had a web browser now. It might have been capable of visiting 0.0000001% of websites on the net, but the entire process was now running from start to finish. 
+
+Up until this stage, we had worked on everything as a group of four, as we thought it was vital that everyone have a full understanding of the core architecture of what we were building. After this, we split into pairs and began checking out tasks from a Trello board. The next period was one of incremental improvements, particularly to the parser and renderer, which needed to get better at differentiating between content and 
