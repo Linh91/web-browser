@@ -43,3 +43,10 @@ Technologies & Principles
 
 How we did it
 --------
+
+How did we end up choosing so complicated, when so many other browsers already exist?
+
+First and foremost, we wanted a challenge. We wanted to learn as much as we could by really stretching our technical abilities, and at the same time we thought it was a great excuse to get better acquainted with how the web really works. We had all built websites and apps before, but we had only a hazy idea of how browsers actually present these to the user.
+
+After reading up on the core components of a browser, our first hurdle was decide *what* we would actually build. We found no shortage of Stack Overflow posts advising against build your own HTML parser, for instance. The complexity was too great, and anyway, the posts advised sagely, parsing HTML is a "solved problem". Why would you attempt to write your own when wise men and women have already spent thousands of hours developing software that already does the job flawlessly? A similar logic applied to rendering engines, and most other thing we would end up needing.
+
