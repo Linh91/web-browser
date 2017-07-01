@@ -72,7 +72,7 @@ Progress started to really accelerate, and we soon set our sights on improving t
 
 All that remained at the end was to spruce up our layout, and add a prettier Ascii logo to our welcome page.
 
-![screenshot 2017-07-01 at 09 28 15](https://user-images.githubusercontent.com/20523607/27761720-8d476e80-5e59-11e7-9430-39334187968e.png)
+![screen shot 2017-07-01 at 22 29 41](https://user-images.githubusercontent.com/25456821/27765565-dabb87ca-5eac-11e7-856e-7774d9a7d591.png)
 
 ![screen shot 2017-07-01 at 22 23 51](https://user-images.githubusercontent.com/25456821/27765543-0a9a03e6-5eac-11e7-8397-4cd5ef92fe58.png)
 
