@@ -4,9 +4,7 @@ Platypus Web Browser
 
 Makers Academy final project to build an original web browser with Node.js in two weeks, by Filipe Fasolin, Ngoc Linh Sammy Ha, Peter Barcsak, and Will Gant.
 
-![screenshot 2017-07-01 at 09 28 15](https://user-images.githubusercontent.com/20523607/27760487-5ae10398-5e40-11e7-9d0a-00286e5aa2fa.png)
-
-![screenshot 2017-07-01 at 09 27 17](https://user-images.githubusercontent.com/20523607/27760493-855e7b5a-5e40-11e7-8b0a-52a2702c40e0.png)
+XXXXXXXXXXXXXXXXXXXXXXXXXX animated GIF demonstration XXXXXXXXXXXXXXXXXXXXXXXXX
 
 Installation & Testing
 --------
@@ -58,10 +56,12 @@ Unfortunately, most websites have more complex structures than this, and our nex
 
 At this point, we could have continued to make the parser more and more sophisticated, but we made a strategic decision to move on and instead aim to build a string of basic components that, together, would be capable of rendering our simple [test website](http://web-browser-test.herokuapp.com/) in the console. Next came the renderer, for which we again used recursion - this time to cycle through the arrays until we found content lying between tags, at which point we logged it to the console.
 
-After this, we built an object to make HTTP get requests. Scenting our first major victory, we raced ahead, mocking up a command line interface with a cool logo, and bringing all our components together to enable us to do this:
+After this, we built an object to make HTTP get requests. Scenting our first major victory, we raced ahead, mocking up a [first command line interface](https://github.com/ffasolin/web-browser/blob/master/platypus.js) with a cool logo, and bringing all our components together to enable us to do this:
 
 ![19621815_10214130448362194_824571723_n](https://user-images.githubusercontent.com/20523607/27761462-09363e64-5e54-11e7-9da5-ea11f73d8492.png)
 
 Wow! What a great feeling. We really had a web browser now. It might have been capable of visiting 0.0000001% of websites on the net, but the entire process was now running from start to finish. 
 
-Up until this stage, we had worked on everything as a group of four, as we thought it was vital that everyone have a full understanding of the core architecture of what we were building. After this, we split into pairs and began checking out tasks from a Trello board. The next period was one of incremental improvements, particularly to the parser and renderer, which needed to get better at differentiating between content and 
+Up until this stage, we had worked on everything as a group of four, as we thought it was vital that everyone have a full understanding of the core architecture of what we were building. After this, we split into pairs and began checking out tasks from a Trello board. The next period was one of incremental improvements, particularly to the parser and renderer, which needed to get better at differentiating between content that the user should see, and HTML tags, scripts, and other material that should stay behind the scenes.
+
+Progress started to really accelerate, and we soon set our sights on improving the user interface to make it look more like familiar, modern web browsers and (slightly) less retro. We gave a lot of thought as to whether, at this stage, to try to build a standalone application and a new renderer capable of placing elements at particular coordinates, but in the end we felt it was better to prioritise adding more basic browser functionality, in particular links. After building an attractive console interface with Blessed - the sole external library used in our project - we set to work on links. We first explored the possibility of making these clickable, but in the end settled on a solution that rendered a box of numbered links for every page, allowing users to type a number in the address bar to visit the corresponding URL.
