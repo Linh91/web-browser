@@ -16,6 +16,7 @@ Installation & Testing
 Use
 --------
 
+* Run `terminal.js` in the main directory
 * Click the address bar at the top of the screen, type a web address, and hit enter
 * Scroll through page content using your mouse wheel or trackpad
 * To follow links, look up the link number in the box on the right side of the screen, and type it into the address bar
